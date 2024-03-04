@@ -15,7 +15,7 @@ function updateTime() {
     WEEK[now.getDay()] +
     " " +
     zeroPadding(now.getDate(), 2) +
-    " " +
+    " - " +
     zeroPadding(now.getHours(), 2) +
     ":" +
     zeroPadding(now.getMinutes(), 2) +
