@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ediciones</title>
+    <title>Ciudades</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
@@ -14,14 +14,14 @@
 
 <body>
     <?php include("sidebar.php") ?>
-    <div class="container">
+    <div class="container" id="main">
         <div class="card">
             <div class="card-header">
-                <h3>Ediciones</h3>
+                <h3>Ciudades</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive w-100">
-                    <table class="table table-hover table striped w-100 dt-responsive" id="tabla_ediciones">
+                    <table class="table table-hover table striped w-100 dt-responsive" id="tabla_ciudades">
                         <thead>
                             <th style="width: 90%;">Edición</th>
                             <th>Acciones</th>
@@ -49,7 +49,7 @@
         </div>
     </div>
     <!-- Modal Nuevo | Editar -->
-    <div class="modal fade" id="modalEdiciones" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCiudades" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,8 +59,8 @@
                 <div class="modal-body">
                     <form action="#" autocomplete="off">
                         <div class="container">
-                            <label for="edicion">Edicion</label>
-                            <input type="text" name="edicion" id="edicion" class="form-control text-uppercase">
+                            <label for="edicion">Ciudad</label>
+                            <input type="text" name="ciudad" id="ciudad" class="form-control text-uppercase">
                         </div>
                     </form>
                 </div>
@@ -78,7 +78,7 @@
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/menu.js"></script>
     <script src="../js/functions.js"></script>
-    <script src="../js/ediciones.js"></script>
+    <script src="../js/ciudades.js"></script>
 </body>
 
 </html>

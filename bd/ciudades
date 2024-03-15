@@ -1,0 +1,30 @@
+/*
+SQLyog Ultimate v11.11 (64 bit)
+MySQL - 5.5.5-10.4.28-MariaDB : Database - bd_restaurante
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `ciudades` */
+
+DROP TABLE IF EXISTS `ciudades`;
+
+CREATE TABLE `ciudades` (
+  `id_ciudad` int(11) NOT NULL AUTO_INCREMENT,
+  `ciudad` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_ciudad`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+/*Data for the table `ciudades` */
+
+insert  into `ciudades`(`id_ciudad`,`ciudad`) values (1,'ASUNCIÓN'),(2,'CIUDAD DEL ESTE'),(3,'SAN LORENZO'),(4,'LUQUE'),(5,'ENCARNACIÓN'),(6,'PEDRO JUAN CABALLERO'),(7,'CAPIATÁ'),(8,'LAMBARÉ'),(9,'FERNANDO DE LA MORA'),(10,'VILLA ELISA'),(11,'ITAUGUÁ'),(12,'COLONIA MARIANO ROQUE ALONSO'),(13,'VILLARRICA'),(14,'CAAGUAZÚ'),(15,'CONCEPCIÓN'),(16,'CORONEL OVIEDO'),(17,'CAACUPÉ'),(18,'SAN JUAN BAUTISTA'),(19,'PILAR'),(20,'CAAZAPÁ'),(21,'LIMPIO'),(22,'ÑEMBY'),(23,'AREGUÁ'),(24,'YPACARAÍ'),(25,'PARAGUARÍ'),(26,'CAAPUCÚ'),(27,'YBYCUÍ'),(28,'ITÁ'),(29,'SAN BERNARDINO'),(30,'PIRIBEBUY'),(31,'QUIINDY'),(32,'YUTY'),(33,'GUARAMBARÉ'),(34,'CARMEN DEL PARANÁ'),(35,'OBLIGADO'),(36,'MBOCAYATY'),(37,'NUEVA COLOMBIA'),(38,'YGATIMÍ'),(40,'GUAYAIBÍ'),(42,'SAN BLAS');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

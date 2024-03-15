@@ -16,6 +16,10 @@ toastr.options = {
   hideMethod: "fadeOut",
 };
 
+siguienteCampo($("#usuario"), $("#password"));
+siguienteClick($("#password"), $("#btn_acceder"));
+siguienteCtrl($("#password"), $("#hide-show"));
+
 function validarAcceso() {
   let usuario = $("#usuario").val();
   let password = $("#password").val();
@@ -27,24 +31,23 @@ function validarAcceso() {
     $("#password").focus();
   } else {
     $.ajax({
-        url: 'servicios/login.php',
-        method: 'POST',
-        data: 
-        {
-            usuario: usuario,
-            password: password
-        },
-        dataType: 'json',
-        success: function(json) {
-            if(json.acceso === true) {
-                // successMessage("Acceso Correcto.!!!");
-                location.href = "vistas/menu.php";
-            } else if(json.acceso === false) {
-                warningMessage("Usuario y/o contraseña incorrectos.!!!");
-            } else {
-                errorMessage(json.error);
-            }
+      url: "servicios/login.php",
+      method: "POST",
+      data: {
+        usuario: usuario,
+        password: password,
+      },
+      dataType: "json",
+      success: function (json) {
+        if (json.acceso === true) {
+          // successMessage("Acceso Correcto.!!!");
+          location.href = "vistas/menu.php";
+        } else if (json.acceso === false) {
+          toastr.warning("Usuario y/o contraseña incorrectos.!!!");
+        } else {
+          errorMessage(json.error);
         }
-    })
-  } 
+      },
+    });
+  }
 }

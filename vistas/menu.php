@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,7 @@
 <body>
   <?php include("sidebar.php") ?>
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="main">
     
   </div>
 

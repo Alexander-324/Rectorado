@@ -4,7 +4,7 @@
 
     try {
 
-        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?"); 
+        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ? AND password = ?"); 
         $stmt->execute(array(
             $_POST["usuario"],
             $_POST["password"]
