@@ -19,11 +19,11 @@ CREATE TABLE `ciudades` (
   `id_ciudad` int(11) NOT NULL AUTO_INCREMENT,
   `ciudad` varchar(30) NOT NULL,
   PRIMARY KEY (`id_ciudad`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 /*Data for the table `ciudades` */
 
-insert  into `ciudades`(`id_ciudad`,`ciudad`) values (1,'ASUNCIÓN'),(2,'CIUDAD DEL ESTE'),(3,'SAN LORENZO'),(4,'LUQUE'),(5,'ENCARNACIÓN'),(6,'PEDRO JUAN CABALLERO'),(7,'CAPIATÁ'),(8,'LAMBARÉ'),(9,'FERNANDO DE LA MORA'),(10,'VILLA ELISA'),(11,'ITAUGUÁ'),(12,'COLONIA MARIANO ROQUE ALONSO'),(13,'VILLARRICA'),(14,'CAAGUAZÚ'),(15,'CONCEPCIÓN'),(16,'CORONEL OVIEDO'),(17,'CAACUPÉ'),(18,'SAN JUAN BAUTISTA'),(19,'PILAR'),(20,'CAAZAPÁ'),(21,'LIMPIO'),(22,'ÑEMBY'),(23,'AREGUÁ'),(24,'YPACARAÍ'),(25,'PARAGUARÍ'),(26,'CAAPUCÚ'),(27,'YBYCUÍ'),(28,'ITÁ'),(29,'SAN BERNARDINO'),(30,'PIRIBEBUY'),(31,'QUIINDY'),(32,'YUTY'),(33,'GUARAMBARÉ'),(34,'CARMEN DEL PARANÁ'),(35,'OBLIGADO'),(36,'MBOCAYATY'),(37,'NUEVA COLOMBIA'),(38,'YGATIMÍ'),(40,'GUAYAIBÍ'),(42,'SAN BLAS');
+insert  into `ciudades`(`id_ciudad`,`ciudad`) values (1,'ASUNCIÓN'),(2,'CIUDAD DEL ESTE'),(3,'SAN LORENZO'),(4,'LUQUE'),(5,'ENCARNACIÓN'),(6,'PEDRO JUAN CABALLERO'),(7,'CAPIATÁ'),(8,'LAMBARÉ'),(9,'FERNANDO DE LA MORA'),(10,'VILLA ELISA'),(11,'ITAUGUÁ'),(12,'COLONIA MARIANO ROQUE ALONSO'),(13,'VILLARRICA'),(14,'CAAGUAZÚ'),(15,'CONCEPCIÓN'),(16,'CORONEL OVIEDO'),(17,'CAACUPÉ'),(18,'SAN JUAN BAUTISTA'),(19,'PILAR'),(20,'CAAZAPÁ'),(21,'LIMPIO'),(22,'ÑEMBY'),(24,'YPACARAÍ'),(25,'PARAGUARÍ'),(26,'CAAPUCÚ'),(27,'YBYCUÍ'),(28,'ITÁ'),(29,'SAN BERNARDINO'),(30,'PIRIBEBUY'),(31,'QUIINDY'),(32,'YUTY'),(33,'GUARAMBARÉ'),(34,'CARMEN DEL PARANÁ'),(35,'OBLIGADO'),(36,'MBOCAYATY'),(37,'NUEVA COLOMBIA'),(38,'YGATIMÍ'),(40,'GUAYAIBÍ'),(42,'SAN BLAS'),(43,'AREGUÁ');
 
 /*Table structure for table `dependencias` */
 
@@ -53,7 +53,7 @@ CREATE TABLE `funcionarios` (
   KEY `id_ciudad` (`id_ciudad`),
   KEY `id_rol` (`id_rol`),
   CONSTRAINT `funcionarios_ibfk_1` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudades` (`id_ciudad`),
-  CONSTRAINT `funcionarios_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_roles`)
+  CONSTRAINT `funcionarios_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 /*Data for the table `funcionarios` */
@@ -65,14 +65,14 @@ insert  into `funcionarios`(`id_funcionario`,`ci`,`nombre`,`apellido`,`id_ciudad
 DROP TABLE IF EXISTS `roles`;
 
 CREATE TABLE `roles` (
-  `id_roles` int(11) NOT NULL AUTO_INCREMENT,
-  `roles` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
+  `rol` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id_rol`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 /*Data for the table `roles` */
 
-insert  into `roles`(`id_roles`,`roles`) values (1,'ADMINISTRADOR');
+insert  into `roles`(`id_rol`,`rol`) values (1,'ADMINISTRADOR'),(2,'SECRETARÍA GENERAL');
 
 /*Table structure for table `usuarios` */
 

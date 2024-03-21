@@ -4,14 +4,14 @@ include ("../conexion.php");
 
 try {
 
-    $stmt = $conexion->prepare("SELECT * FROM ciudades ORDER BY ciudad");
+    $stmt = $conexion->prepare("SELECT * FROM roles ORDER BY rol");
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = array();
     foreach($resultado as $datos) {
         $salida [] = array(
-            "id_ciudad" => $datos["id_ciudad"],
-            "ciudad" => $datos["ciudad"]
+            "id_rol" => $datos["id_rol"],
+            "rol" => $datos["rol"]
         );
     }
 

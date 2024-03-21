@@ -4,8 +4,8 @@ include("../conexion.php");
 
 try {
 
-    $stmt = $conexion->prepare("DELETE FROM ciudades WHERE id_ciudad = ?");
-    $stmt->execute(array($_POST["id_ciudad"]));
+    $stmt = $conexion->prepare("DELETE FROM roles WHERE id_rol = ?");
+    $stmt->execute(array($_POST["id_rol"]));
     $salida = array(
         'eliminado' => true,
         'mensaje' => 'Registro Eliminado.'    

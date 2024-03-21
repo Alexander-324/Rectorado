@@ -19,14 +19,7 @@
 
       <footer class="footer">
           <div class="row mt-4">
-              <div class="col-2 text-start">
-                  <div>
-                      <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#modalUsuario">
-                          <img src="../img/usuarios/alexander.jpg" class="img-fluid rounded-5" alt="" width="70px" height="50px">
-                      </a>
-                  </div>
-              </div>
-              <div class="col-8 text-center ">
+              <div class="col-10 text-center">
                   <strong>
                       <p>Web hecha por los alumnos del 5to año 2024 de la carrera de Ingeniería en Informática Empresarial</p>
                   </strong>
@@ -36,6 +29,5 @@
                       <p id="time"></p>
                   </div>
               </div>
-          </div>
           </div>
       </footer>

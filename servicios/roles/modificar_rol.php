@@ -4,28 +4,28 @@ include("../conexion.php");
 
 try {
 
-    $ciudad_comparar = '';
+    $rol_comparar = '';
     $modify = false;
 
-    $stmt = $conexion->prepare("SELECT ciudad FROM ciudades WHERE id_ciudad = ?");
-    $stmt->execute(array($_POST["id_ciudad"]));
+    $stmt = $conexion->prepare("SELECT rol FROM roles WHERE id_rol = ?");
+    $stmt->execute(array($_POST["id_rol"]));
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($resultado as $datos) {
-        $ciudad_comparar = $datos["ciudad"];
+        $rol_comparar = $datos["rol"];
     }
 
-    if ($ciudad_comparar == $_POST["ciudad"]) {
+    if ($rol_comparar == $_POST["rol"]) {
         $modify = true;
     } else {
-        $stmt = $conexion->prepare("SELECT ciudad FROM ciudades WHERE ciudad = ?");
-        $stmt->execute(array($_POST["ciudad"]));
+        $stmt = $conexion->prepare("SELECT rol FROM roles WHERE rol = ?");
+        $stmt->execute(array($_POST["rol"]));
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($resultado == true) {
             $modify = false;
             $salida = array(
                 'existe' => true,
-                'mensaje' => 'La ciudad ingresada ya existe.'
+                'mensaje' => 'El rol ingresado ya existe.'
             );
         } else {
             $modify = true;
@@ -33,10 +33,10 @@ try {
     }
 
     if ($modify === true) {
-        $stmt = $conexion->prepare("UPDATE ciudades SET ciudad = ? WHERE id_ciudad = ?");
+        $stmt = $conexion->prepare("UPDATE roles SET rol = ? WHERE id_rol = ?");
         $stmt->execute(array(
-            $_POST["ciudad"],
-            $_POST["id_ciudad"]
+            $_POST["rol"],
+            $_POST["id_rol"]
         ));
         $salida = array(
             'modificado' => true,
@@ -46,7 +46,7 @@ try {
 } catch (PDOException $e) {
     $salida = array(
         'modificado' => false,
-        'mensaje' => 'Ocurrio un error al guadar. ' . $e->getMessage()
+        'mensaje' => 'Ocurrio un error al modificar. ' . $e->getMessage()
     );
 }
 

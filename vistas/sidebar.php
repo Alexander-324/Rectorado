@@ -4,7 +4,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a href="#">
-      <img src="../img/usuarios/alexander.jpg" alt="" width="50px" height="50px">
+      <img class="img-fluid rounded-5" src="../img/usuarios/alexander.jpg" alt="" width="50px" height="50px">
     </a>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
@@ -14,7 +14,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="menu.php">Inicio</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -22,7 +22,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="ciudades.php">Ciudades</a></li>
-              <li><a class="dropdown-item" href="#">Roles</a></li>
+              <li><a class="dropdown-item" href="roles.php">Roles</a></li>
               <li><a class="dropdown-item" href="#">Funcionarios</a></li>
               <li><a class="dropdown-item" href="#">Usuarios</a></li>
               <li><a class="dropdown-item" href="#">Dependencias</a></li>

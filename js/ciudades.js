@@ -1,25 +1,38 @@
-let operacion = "";
+toastr.options = {
+  closeButton: false,
+  debug: false,
+  newestOnTop: false,
+  progressBar: false,
+  positionClass: "toast-top-center",
+  preventDuplicates: true,
+  onclick: null,
+  showDuration: "300",
+  hideDuration: "1000",
+  timeOut: "2000",
+  extendedTimeOut: "1000",
+  showEasing: "swing",
+  hideEasing: "linear",
+  showMethod: "fadeIn",
+  hideMethod: "fadeOut",
+};
+
+let op_ciudades = "";
 let id_ciudad = 0;
 
-$("#btn_nuevo").click(function () {
-  $("#modalCiudades").modal("show");
-  $(".modal-title").text("Nueva Ciudad");
-  operacion = "Nuevo";
-});
-
-let ciudades;
+var ciudades;
 
 function cargarCiudades() {
   ciudades = $("#tabla_ciudades").DataTable({
+    // Traduccion del DataTables
     language: {
       decimal: "",
       emptyTable: "No hay datos disponibles en la tabla",
-      info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-      infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-      infoFiltered: "(filtradas de _MAX_ entradas totales)",
+      info: "Mostrando _START_ dato/s de _END_ a _TOTAL_ datos",
+      infoEmpty: "Mostrando 0 a 0 de 0 datos",
+      infoFiltered: "(filtrados de _MAX_ datos totales)",
       infoPostFix: "",
       thousands: ",",
-      lengthMenu: "Mostrar _MENU_ entradas",
+      lengthMenu: "Mostrar _MENU_ datos",
       loadingRecords: "Cargando...",
       processing: "Procesando...",
       search: "Buscar:",
@@ -50,11 +63,12 @@ function cargarCiudades() {
       {
         data: null,
         defaultContent:
-          "<div class='container-fluid d-flex'> <a class='btn btn-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
-          "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
+          "<div class='container d-flex'><a class='btn btn-primary neon-btn editar me-2'><i class='fa fa-pen-to-square'></i> </a>" +
+          "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a></div>",
       },
     ],
     createdRow: function (row, data) {
+      // Asignar el valor de id de la tabla como el ID de los botones
       $("a.editar", row).attr("id", data.id_ciudad);
       $("a.eliminar", row).attr("id", data.id_ciudad);
     },
@@ -63,29 +77,42 @@ function cargarCiudades() {
 
 cargarCiudades();
 
-function guardarCiudad() {
+$("#btn_nuevo").click(function () {
+  op_ciudades = "Nuevo";
+  $("#modalCiudades").modal("show");
+  $(".modal-title").text("Nueva Ciudad");
+  $("#ciudad").val("");
+});
+
+siguienteClick($("#ciudad"), $("#btn_guardar"))
+
+function guadarCiudad() {
   let ciudad = $("#ciudad").val().toUpperCase();
-  $.ajax({
-    url: "../servicios/ciudades/guardar_ciudad.php",
-    method: "POST",
-    data: { ciudad: ciudad },
-    dataType: "json",
-    success: function (json) {
-      if (json.guardado === true) {
-        successMessage("Registro Insertado.");
-        ciudades.ajax.reload();
-        $("#modalCiudades").modal("hide");
-      } else if (json.existe === true) {
-        warningMessage("La ciudad ya existe. Ingrese otra ciudad");
-        $("#ciudad").focus();
-      } else {
-        errorMessage(json.mensaje);
-      }
-    },
-  });
+  if (ciudad.length == 0) {
+    toastr.warning("Ingrese una ciudad.");
+    $("#ciudad").focus();
+  } else {
+    $.ajax({
+      url: "../servicios/ciudades/guardar_ciudad.php",
+      method: "POST",
+      data: { ciudad: ciudad },
+      dataType: "json",
+      success: function (json) {
+        if (json.guardado == true) {
+          successMessage(json.mensaje);
+          ciudades.ajax.reload();
+        } else if (json.existe == true) {
+          warningMessage(json.mensaje);
+        } else {
+          errorMessage(json.mensaje);
+        }
+      },
+    });
+  }
 }
 
 $(document).on("click", ".editar", function () {
+  op_ciudades = "Modificar";
   id_ciudad = $(this).attr("id");
   $("#modalCiudades").modal("show");
   $(".modal-title").text("Modificar Ciudad");
@@ -94,38 +121,92 @@ $(document).on("click", ".editar", function () {
   $.ajax({
     url: "../servicios/ciudades/obtener_ciudad.php",
     method: "POST",
-    data: { id_ciudad: id_ciudad },
+    data: {
+      id_ciudad: id_ciudad,
+    },
     dataType: "json",
     success: function (json) {
-      if (json.encontrado === true) {
-        $("#ciudad").val(json.ciudad);
-      }
+      $("#modalCiudades").modal("show");
+      $(".modal-title").text("Modificar Ciudad");
+      $("#ciudad").val(json.ciudad);
+      $("#ciudad").focus();
     },
   });
 });
 
 function modificarCiudad() {
   let ciudad = $("#ciudad").val().toUpperCase();
-  $.ajax({
-    url: "../servicios/ciudades/modificar_ciudad.php",
-    method: "POST",
-    data: {
-      ciudad: ciudad,
-      id_ciudad: id_ciudad,
-    },
-    dataType: "json",
-    success: function (json) {
-      if(json.modificado === true) {
-        successMessage(json.mensaje);
-      }
-    },
+  if (ciudad.length == 0) {
+    toastr.warning("Ingrese una ciudad.");
+    $("#ciudad").focus();
+  } else {
+    $.ajax({
+      url: "../servicios/ciudades/modificar_ciudad.php",
+      method: "POST",
+      data: {
+        id_ciudad: id_ciudad,
+        ciudad: ciudad,
+      },
+      dataType: "json",
+      success: function (json) {
+        if (json.modificado == true) {
+          successMessage(json.mensaje);
+          ciudades.ajax.reload();
+          $("#ciudad").val("");
+          $("#modal_ciudades").modal("hide");
+        } else if (json.existe == true) {
+          warningMessage(json.mensaje);
+        } else {
+          errorMessage(json.mensaje);
+        }
+      },
+    });
+  }
+}
+
+function eliminarCiudad(id_ciudad) {
+  Swal.fire({
+    title: "!!!MENSAJE!!!",
+    text: "¿Esta seguro de eliminar esta ciudad?",
+    icon: "question",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    showCancelButton: true,
+    confirmButtonText: "Sí, eliminar.",
+    cancelButtonText: "Cancelar.",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: "../servicios/ciudades/eliminar_ciudad.php",
+        method: "POST",
+        data: { id_ciudad: id_ciudad },
+        dataType: "json",
+        success: function (json) {
+          if (json.eliminado == true) {
+            successMessage(json.mensaje);
+            ciudades.ajax.reload();
+          } else {
+            errorMessage(json.mensaje);
+          }
+        },
+      });
+    }
   });
 }
 
+$(document).on("click", ".eliminar", function () {
+  id_ciudad = $(this).attr("id");
+  eliminarCiudad(id_ciudad);
+});
+
 $("#btn_guardar").click(function () {
-  if (operacion === "Nuevo") {
-    guardarEdicion();
-  } else if (operacion === "Editar") {
+  if (op_ciudades == "Nuevo") {
+    guadarCiudad();
+  } else if (op_ciudades == "Modificar") {
     modificarCiudad();
   }
+});
+
+$("#btn_salir").click(() => {
+  location.href = "../vistas/menu.php";
 });

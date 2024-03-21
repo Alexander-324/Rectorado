@@ -1,48 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciudades</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/menu.css">
 </head>
 
 <body>
     <?php include("sidebar.php") ?>
-    <div class="container" id="main">
+    <div class="container mb-3" id="main">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header text-center">
                 <h3>Ciudades</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive w-100">
-                    <table class="table table-hover table striped w-100 dt-responsive" id="tabla_ciudades">
-                        <thead>
-                            <th style="width: 90%;">Edición</th>
-                            <th>Acciones</th>
+                <div class="table-responsive mt-2">
+                    <table class="table table-striped table-hover w-100" id="tabla_ciudades">
+                        <thead class="text-center">
+                            <tr>
+                                <th style="width: 90%;">Ciudad</th>
+                                <th>Acciones</th>
+                            </tr>
                         </thead>
-                    </table>
-                    <tbody>
+                        <tbody>
 
-                    </tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary" id="btn_nuevo">
-                            <i class="fa fa-plus"> Nuevo</i>
-                        </button>
+                        <button type="button" class="btn btn-primary" id="btn_nuevo"><i class="fa fa-plus"></i> Nuevo</button>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-secondary " id="btn_nuevo">
-                            <i class="fa fa-x"> Salir</i>
-                        </button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-x"></i> Salir</button>
                     </div>
                 </div>
             </div>
@@ -57,26 +58,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" autocomplete="off">
                         <div class="container">
-                            <label for="edicion">Ciudad</label>
-                            <input type="text" name="ciudad" id="ciudad" class="form-control text-uppercase">
+                            <div>
+                                <label for="ciudad">Ciudad</label>
+                                <input type="text" name="ciudad" id="ciudad" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                            </div>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_guardar">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btn_guardar"> Guardar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-    <?php include("footer.php") ?>
     <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/datatables.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/all.min.js"></script>
+    <script src="../js/toastr.js"></script>
     <script src="../js/sweetalert2.all.min.js"></script>
-    <script src="../js/menu.js"></script>
     <script src="../js/functions.js"></script>
     <script src="../js/ciudades.js"></script>
 </body>
