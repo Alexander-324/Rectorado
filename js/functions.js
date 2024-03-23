@@ -15,14 +15,6 @@ function siguienteClick(actual, siguiente) {
   });
 }
 
-function siguienteSelect(actual, siguiente) {
-  $(actual).change(function (event) {
-    if (event.shiftKey) {
-      siguiente.focus();
-    }
-  });
-}
-
 function siguienteCtrl(actual, siguiente) {
   $(actual).keydown(function (event) {
     if (event.ctrlKey) {
@@ -85,7 +77,7 @@ function formatear(num) {
 
 function quitarSeparador(num) {
   // Convertir el número a cadena y verificar si contiene un punto
-  if (num.toString().includes('.')) {
+  if (num.toString().includes(".")) {
     // Si tiene un punto, quitar todos los puntos
     var n = num.toString().replace(/\./g, "");
     return n;

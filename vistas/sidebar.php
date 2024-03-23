@@ -23,7 +23,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="ciudades.php">Ciudades</a></li>
               <li><a class="dropdown-item" href="roles.php">Roles</a></li>
-              <li><a class="dropdown-item" href="#">Funcionarios</a></li>
+              <li><a class="dropdown-item" href="funcionarios.php">Funcionarios</a></li>
               <li><a class="dropdown-item" href="#">Usuarios</a></li>
               <li><a class="dropdown-item" href="#">Dependencias</a></li>
               <li><a class="dropdown-item" href="#">Áreas</a></li>

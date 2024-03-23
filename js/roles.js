@@ -35,8 +35,8 @@ function cargarRoles() {
     language: {
       decimal: "",
       emptyTable: "No hay datos disponibles en la tabla",
-      info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-      infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+      info: "Mostrando _START_ a _END_ de _TOTAL_ datos",
+      infoEmpty: "Sin datos a mostrar",
       infoFiltered: "(filtradas de _MAX_ entradas totales)",
       infoPostFix: "",
       thousands: ",",

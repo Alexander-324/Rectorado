@@ -77,7 +77,6 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/datatables.min.js"></script>
     <script src="../js/sweetalert2.all.min.js"></script>
-    <!-- <script src="../js/menu.js"></script> -->
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
     <script src="../js/roles.js"></script>
