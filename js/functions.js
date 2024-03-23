@@ -117,8 +117,8 @@ function solo_numeros_sin_cero(input) {
 }
 
 function mayusculas_espacio(input) {
-  // Elimina todos los caracteres que no sean letras ni espacios
-  return input.replace(/[^a-zA-Z\s\p{L}]/gu, "");
+  // Elimina todos los caracteres que no sean letras, espacios o letras con acentos
+  return input.replace(/[^a-zA-Z\sáéíóúÁÉÍÓÚüÜ]/gu, "");
 }
 
 function validarCorreo(correo) {

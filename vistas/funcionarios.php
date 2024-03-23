@@ -67,15 +67,18 @@
                         <form action="#" id="form_funcionarios">
                             <div>
                                 <label for="ci">C.I</label>
-                                <input type="text" name="ci" id="ci" class="form-control" autocomplete="off" maxlength="7">
+                                <input type="text" name="ci" id="ci" class="form-control" autocomplete="off" maxlength="7"
+                                oninput="this.value=solo_numeros_sin_cero(this.value)">
                             </div>
                             <div class="mt-2">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                                <input type="text" name="nombre" id="nombre" class="form-control text-uppercase" autocomplete="off" maxlength="30"
+                                oninput="this.value=mayusculas_espacio(this.value)">
                             </div>
                             <div class="mt-2">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" name="apellido" id="apellido" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                                <input type="text" name="apellido" id="apellido" class="form-control text-uppercase" autocomplete="off" maxlength="30"
+                                oninput="this.value=mayusculas_espacio(this.value)">
                             </div>
                             <div class="mt-2">
                                 <label for="ciudad">Ciudad</label>
@@ -85,7 +88,8 @@
                             </div>
                             <div class="mt-2">
                                 <label for="direcion">Dirección</label>
-                                <input type="text" name="direccion" id="direccion" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                                <input type="text" name="direccion" id="direccion" class="form-control text-uppercase" autocomplete="off" maxlength="30"
+                                oninput="this.value=mayusculas_espacio(this.value)">
                             </div>
                             <div class="mt-2">
                                 <label for="rol">Rol</label>
