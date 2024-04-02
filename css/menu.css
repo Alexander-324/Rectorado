@@ -53,3 +53,19 @@
 .font {
     font-size: 14px;
 }
+
+.vert {
+    vertical-align: middle;
+}
+
+.perfil {
+    cursor: pointer;
+}
+
+.swal2-image {
+    border-radius: 5%;
+}
+
+#user_perfil {
+    cursor: pointer;
+}

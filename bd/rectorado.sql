@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2024 a las 17:17:25
+-- Tiempo de generación: 03-04-2024 a las 01:39:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -139,7 +139,7 @@ INSERT INTO `roles` (`id_rol`, `rol`) VALUES
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuarios` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   `id_funcionario` int(11) NOT NULL,
   `correo` varchar(30) NOT NULL,
   `foto` varchar(100) NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuarios`, `id_funcionario`, `correo`, `foto`, `usuario`, `password`) VALUES
+INSERT INTO `usuarios` (`id_usuario`, `id_funcionario`, `correo`, `foto`, `usuario`, `password`) VALUES
 (1, 1, 'alexrivasbenitez324@gmail.com', 'alexander.jpg', 'alexander', 'AleX1.2.');
 
 --
@@ -175,8 +175,7 @@ ALTER TABLE `dependencias`
 --
 ALTER TABLE `funcionarios`
   ADD PRIMARY KEY (`id_funcionario`),
-  ADD KEY `id_ciudad` (`id_ciudad`),
-  ADD KEY `id_rol` (`id_rol`);
+  ADD KEY `id_ciudad` (`id_ciudad`);
 
 --
 -- Indices de la tabla `roles`
@@ -188,7 +187,7 @@ ALTER TABLE `roles`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuarios`),
+  ADD PRIMARY KEY (`id_usuario`),
   ADD KEY `id_funcionario` (`id_funcionario`);
 
 --
@@ -223,7 +222,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

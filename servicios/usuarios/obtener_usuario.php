@@ -5,26 +5,23 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare(
-    "SELECT e.id_empleado, r.id_rol, CONCAT(e.nombre,' ',e.apellido) as empleado, r.rol, e.ci,
-    u.email, u.imagen, u.usuario, u.contrasena FROM usuarios u JOIN empleados e
-    ON u.id_empleado = e.id_empleado JOIN roles r ON e.id_rol = r.id_rol 
-    WHERE u.id_usuario = :id_usuario");
-    $stmt->execute(array(':id_usuario' => $_POST["id_usuario"]));
-    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    "SELECT f.ci, CONCAT(f.nombre, ' ', f.apellido) as nombre, u.correo, u.foto, u.usuario, u.password
+    FROM usuarios u JOIN funcionarios f ON u.id_funcionario = f.id_funcionario WHERE u.id_usuario = ?");
+    $stmt->execute(array($_POST["id_usuario"]));
+    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = array();
-    foreach($resultados as $datos) {
-        $salida["id_empleado"] = $datos["id_empleado"];
-        $salida["id_rol"] = $datos["id_rol"];
+    foreach($resultado as $datos) {
+        $salida["encontrado"] = true;
         $salida["ci"] = $datos["ci"];
-        $salida["empleado"] = $datos["empleado"];
-        $salida["rol"] = $datos["rol"];
-        $salida["email"] = $datos["email"];
-        $salida["imagen"] = $datos["imagen"];
+        $salida["nombre"] = $datos["nombre"];
+        $salida["correo"] = $datos["correo"];
+        $salida["foto"] = $datos["foto"];
         $salida["usuario"] = $datos["usuario"];
-        $salida["contrasena"] = $datos["contrasena"];
+        $salida["password"] = $datos["password"];
     }
-}catch (PDOException $e) {
-    echo 'Ocurrio un error';
+} catch (PDOException $e) {
+    $salida["encontrado"] = false;
+    $salida["mensaje"] = "Ocurrio un error al obtener los datos del usuario.!!!". $e->getMessage();
 }
 
 echo json_encode($salida);

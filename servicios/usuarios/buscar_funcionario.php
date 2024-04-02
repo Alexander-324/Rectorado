@@ -3,30 +3,32 @@
 include("../conexion.php");
 
 try {
-    $stmt = $conexion->prepare(
-    "SELECT * FROM usuarios u JOIN funcionarios f ON u.id_empleado = f.id_funcionario WHERE f.ci = ?");
+
+    $stmt = $conexion->prepare("SELECT f.id_funcionario, CONCAT(f.nombre, ' ', f.apellido) as nombre
+    FROM usuarios u JOIN funcionarios f ON u.id_funcionario = f.id_funcionario 
+    WHERE f.ci = ?");
     $stmt->execute(array($_POST["ci"]));
-    if($stmt->rowCount() > 0) {
-        $salida = array(
-            'tiene' => true,
-            'mensaje' => 'El c.i ingresado ya cuenta con un usuario y contraseña.'
-        );
+    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $salida = array();
+    if ($stmt->rowCount() > 0) {
+        $salida["tiene"] = true;
+        $salida["mensaje"] = "El ci ingresado ya tiene una cuenta de usuario.!!!";
     } else {
-        $stmt = $conexion->prepare("SELECT f.id_funcionario, r.id_rol, CONCAT(f.nombre,' ',f.apellido) as funcionario, r.rol
-        FROM funcionarios f JOIN roles r ON e.id_rol = r.id_rol 
-        WHERE f.ci = ?;");
-        $stmt->execute(array(':ci' => $_POST["ci"]));
-        $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $salida = array();
-        foreach($resultados as $datos) {
+        $stmt = $conexion->prepare(
+            "SELECT id_funcionario, CONCAT(nombre, ' ', apellido ) as nombre 
+            FROM funcionarios WHERE ci = ?"
+        );
+        $stmt->execute(array($_POST["ci"]));
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($resultado as $datos) {
+            $salida["tiene"] = false;
             $salida["id_funcionario"] = $datos["id_funcionario"];
-            $salida["id_rol"] = $datos["id_rol"];
-            $salida["funcionario"] = $datos["funcionario"];
-            $salida["rol"] = $datos["rol"];
+            $salida["nombre"] = $datos["nombre"];
         }
     }
 } catch (PDOException $e) {
-    echo 'Ocurrio un error. ' .$e->getMessage();
+    $salida["error"] = false;
+    $salida["mensaje"] = "Ocurrio un error. " . $e->getMessage();
 }
 
 echo json_encode($salida);

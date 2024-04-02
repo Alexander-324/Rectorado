@@ -167,7 +167,7 @@ function operaciones() {
   }
 }
 
-// Funcionalida del boton de eliminar
+// Funcionalidad del boton de eliminar
 
 $(document).on("click", ".eliminar", function () {
   // Se obtiene el id de la rol y se almacena en la variable id_rol
