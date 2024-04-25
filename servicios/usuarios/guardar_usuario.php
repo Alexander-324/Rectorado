@@ -4,11 +4,13 @@ include("../conexion.php");
 
 try {
 
-    $stmt = $conexion->prepare("INSERT INTO usuarios 
-    (id_funcionario, correo, foto, usuario, password) VALUES(?,?,?,?,?)");
+        $stmt = $conexion->prepare(
+        "INSERT INTO usuarios (nombre, apellido, correo, id_rol , foto, usuario, password) VALUES(?,?,?,?,?,?,?)");
         $stmt->execute(array(
-            $_POST["id_funcionario"],
+            $_POST["nombre"],
+            $_POST["apellido"],
             $_POST["correo"],
+            $_POST["id_rol"],
             $_POST["foto"],
             $_POST["usuario"],
             $_POST["password"],
@@ -18,7 +20,7 @@ try {
             "guardado" => true,
             "mensaje" => "Registro Insertado"
         );
-
+    
     // } else {
     //     $imagen = $_FILES['foto']['tmp_name'];
     //     $extension = explode('.', $_FILES['foto']['name']);
@@ -38,8 +40,8 @@ try {
 
 } catch (PDOException $e) {
     $salida = array(
-        "guardado" => true,
-        "mensaje" => "Ocurrio un error. " .$e->getMessage()
+        "guardado" => false,
+        "mensaje" => "Ocurrio un error. " . $e->getMessage()
     );
 }
 

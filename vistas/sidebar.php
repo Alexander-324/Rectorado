@@ -52,8 +52,8 @@
               <li><a class="dropdown-item" href="roles.php">Roles</a></li>
               <li><a class="dropdown-item" href="funcionarios.php">Funcionarios</a></li>
               <li><a class="dropdown-item" href="usuarios.php">Usuarios</a></li>
-              <li><a class="dropdown-item" href="#">Dependencias</a></li>
-              <li><a class="dropdown-item" href="#">Áreas</a></li>
+              <li><a class="dropdown-item" href="dependencias.php">Dependencias</a></li>
+              <li><a class="dropdown-item" href="areas.php">Áreas</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">

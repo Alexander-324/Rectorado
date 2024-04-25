@@ -5,9 +5,9 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare("SELECT f.id_funcionario, f.ci, 
-    CONCAT(f.nombre, ' ', f.apellido) as nombre, c.ciudad, f.direccion, r.rol
-    FROM funcionarios f JOIN ciudades c ON f.id_ciudad = c.id_ciudad JOIN roles r
-    ON f.id_rol = r.id_rol;");
+    CONCAT(f.nombre, ' ', f.apellido) as nombre, c.ciudad, f.direccion, d.dependencia
+    FROM funcionarios f JOIN ciudades c ON f.id_ciudad = c.id_ciudad JOIN dependencias d
+    ON f.id_dependencia = d.id_dependencia;");
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = array();
@@ -18,7 +18,7 @@ try {
             "nombre" => $datos["nombre"],
             "ciudad" => $datos["ciudad"],
             "direccion" => $datos["direccion"],
-            "rol" => $datos["rol"],
+            "dependencia" => $datos["dependencia"],
         );
     }
 

@@ -27,11 +27,12 @@
                     <table class="table table-striped table-hover w-100" id="tabla_usuarios">
                         <thead>
                             <tr>
-                                <th style="width: 30%;" class="text-center">Funcionario</th>
-                                <th style="width: 30%;" class="text-center">Correo</th>
-                                <th style="width: 10%;" class="text-center">Foto</th>
+                                <th style="width: 20%;" class="text-center">Nombre</th>
                                 <th style="width: 20%;" class="text-center">Usuario</th>
-                                <th style="width: 10%;" class="text-center">Acciones</th>
+                                <th style="width: 20%;" class="text-center">Correo</th>
+                                <th style="width: 20%;" class="text-center">ROL</th>
+                                <th style="width: 15%;" class="text-center">Foto</th>
+                                <th style="width: 5%;" class="text-center">Acciones</th>
                             </tr>
                         </thead>
                     </table>
@@ -65,44 +66,50 @@
                     <div class="container">
                         <form action="#" id="form_usuarios" enctype="multipart/form-data" autocomplete="off">
                             <div class="row d-flex">
-                                <div class="col-10">
-                                    <label for="ci">C.I</label>
-                                    <input type="text" name="ci" id="ci" class="form-control text-end" maxlength="7" oninput="this.value=solo_numeros_sin_cero(this.value)">
+                                <div class="mt-2">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" name="nombre" id="nombre" class="form-control text-uppercase" maxlength="30">
                                 </div>
-                                <div class="col-2 mt-4 text-center">
-                                    <button type="button" class="btn btn-primary" id="btn_buscar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buscar" onclick="buscar_funcionario();"><i class="fa fa-search"></i></button>
+                                <div class="mt-2">
+                                    <label for="apellido">Apellido</label>
+                                    <input type="text" name="apellido" id="apellido" class="form-control text-uppercase" maxlength="30">
                                 </div>
-                            </div>
-                            <div class="mt-2">
-                                <label for="funcionario">Funcionario</label>
-                                <input type="text" name="funcionario" id="funcionario" class="form-control" readonly>
-                            </div>
-                            <div class="mt-2">
-                                <label for="correo">Correo</label>
-                                <input type="text" name="correo" id="correo" class="form-control" maxlength="30">
-                            </div>
-                            <div class="mt-2 text-center">
-                                <span id="span_vista">
+                                <div class="mt-2">
+                                    <label for="correo">Correo</label>
+                                    <input type="text" name="correo" id="correo" class="form-control" maxlength="30">
+                                    <div id="error_correo" class="mt-1 fs-5">
 
-                                </span>
-                            </div>
-                            <div class="mt-2">
-                                <label for="usuario">Usuario</label>
-                                <input type="text" name="usuario" id="usuario" class="form-control" autocomplete="off" maxlength="30">
-                            </div>
-                            <div class="mt-2">
-                                <label for="password">Contraseña</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" name="password" id="password" maxlength="30" />
-                                    <button class="btn btn-primary border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
-                                        <i class="fa fa-eye icono fw-bold"></i>
-                                    </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mt-2">
-                                <input type="hidden" id="id_funcionario" name="id_funcionario" class="form-control">
-                                <input type="hidden" id="perfil" name="perfil" class="form-control">
-                            </div>
+                                <div class="mt-2">
+                                    <label for="rol">Rol</label>
+                                    <select name="rol" id="rol" class="form-select">
+                                        <option value="">Seleccione un rol</option>
+                                    </select>
+                                </div>
+                                <div class="mt-2">
+                                    <label for="usuario">Usuario</label>
+                                    <input type="text" name="usuario" id="usuario" class="form-control" autocomplete="off" maxlength="30" oninput="validarUsuario(this.value)">
+                                    <div id="error_usuario" class="mt-1 fs-5">
+
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <label for="password">Contraseña</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password" id="password" maxlength="30" oninput="validarContrasenha()" />
+                                        <button class="btn btn-primary border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
+                                            <i class="fa fa-eye icono fw-bold"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="error_password" class="mt-1 fs-5">
+
+                                </div>
+                                <div class="mt-2">
+                                    <input type="hidden" id="id_funcionario" name="id_funcionario" class="form-control">
+                                    <input type="hidden" id="perfil" name="perfil" class="form-control">
+                                </div>
                         </form>
                     </div>
                 </div>

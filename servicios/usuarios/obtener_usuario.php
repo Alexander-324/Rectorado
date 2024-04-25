@@ -5,17 +5,17 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare(
-    "SELECT f.ci, CONCAT(f.nombre, ' ', f.apellido) as nombre, u.correo, u.foto, u.usuario, u.password
-    FROM usuarios u JOIN funcionarios f ON u.id_funcionario = f.id_funcionario WHERE u.id_usuario = ?");
+    "SELECT nombre, apellido, correo, id_rol, usuario, password
+    FROM usuarios WHERE id_usuario = ?");
     $stmt->execute(array($_POST["id_usuario"]));
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = array();
     foreach($resultado as $datos) {
         $salida["encontrado"] = true;
-        $salida["ci"] = $datos["ci"];
         $salida["nombre"] = $datos["nombre"];
+        $salida["apellido"] = $datos["apellido"];
         $salida["correo"] = $datos["correo"];
-        $salida["foto"] = $datos["foto"];
+        $salida["id_rol"] = $datos["id_rol"];
         $salida["usuario"] = $datos["usuario"];
         $salida["password"] = $datos["password"];
     }

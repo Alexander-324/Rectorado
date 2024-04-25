@@ -48,21 +48,21 @@ function comboCiudades() {
   });
 }
 
-function comboRoles() {
+function comboDependencias() {
   $.ajax({
     type: "POST",
-    url: "../servicios/roles/cargar_roles.php",
+    url: "../servicios/dependencias/cargar_dependencias.php",
     dataType: "json",
     success: function (json) {
       $.each(json, function (i, obj) {
-        $("#rol").append($("<option>").text(obj.rol).attr("value", obj.id_rol));
+        $("#dependencia").append($("<option>").text(obj.dependencia).attr("value", obj.id_dependencia));
       });
     },
   });
 }
 
 comboCiudades();
-comboRoles();
+comboDependencias();
 
 siguienteCampo($("#ci"), $("#nombre"));
 siguienteCampo($("#nombre"), $("#apellido"));
@@ -122,7 +122,7 @@ function cargarFuncionarios() {
       { data: "nombre" },
       { data: "ciudad" },
       { data: "direccion" },
-      { data: "rol" },
+      { data: "dependencia" },
       {
         data: null,
         defaultContent:
@@ -145,7 +145,7 @@ function esta_cargado() {
   let apellido = $("#apellido").val().toUpperCase();
   let id_ciudad = $("#ciudad").val();
   let direccion = $("#direccion").val().toUpperCase();
-  let id_rol = $("#rol").val();
+  let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
   if (ci.length == 0) {
@@ -167,8 +167,8 @@ function esta_cargado() {
     toastr.warning("Ingrese la direccion.");
     $("#direccion").focus();
     return false;
-  } else if (id_rol.length == 0) {
-    toastr.warning("Seleccione un rol.");
+  } else if (id_dependencia.length == 0) {
+    toastr.warning("Seleccione una dependencia.");
     return false;
   } else {
     return true;
@@ -181,7 +181,7 @@ function guardar_funcionario() {
   let apellido = $("#apellido").val().toUpperCase();
   let id_ciudad = $("#ciudad").val();
   let direccion = $("#direccion").val().toUpperCase();
-  let id_rol = $("#rol").val();
+  let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
   if (esta_cargado() == true) {
@@ -195,7 +195,7 @@ function guardar_funcionario() {
         apellido: apellido,
         id_ciudad: id_ciudad,
         direccion: direccion,
-        id_rol: id_rol,
+        id_dependencia: id_dependencia,
       },
       dataType: "json",
       success: function (json) {
@@ -236,7 +236,7 @@ $(document).on("click", ".editar", function () {
         $("#apellido").val(json.apellido);
         $("#ciudad").val(json.id_ciudad);
         $("#direccion").val(json.direccion);
-        $("#rol").val(json.id_rol);
+        $("#dependencia").val(json.id_dependencia);
       } else {
         // Mostramos el error si hubiese
         errorMessage(json.mensaje);
@@ -251,7 +251,7 @@ function modificar_funcionario() {
   let apellido = $("#apellido").val().toUpperCase();
   let id_ciudad = $("#ciudad").val();
   let direccion = $("#direccion").val().toUpperCase();
-  let id_rol = $("#rol").val();
+  let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
   if (esta_cargado() == true) {
@@ -265,7 +265,7 @@ function modificar_funcionario() {
         apellido: apellido,
         id_ciudad: id_ciudad,
         direccion: direccion,
-        id_rol: id_rol,
+        id_dependencia: id_dependencia,
         // Enviamos la variable id_fun que contiene el id del funcionario que estamos modificando
         id_funcionario: id_fun,
       },

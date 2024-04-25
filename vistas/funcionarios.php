@@ -30,8 +30,8 @@
                                 <th style="width: 5%;" class="text-center">C.I</th>
                                 <th style="width: 20%;" class="text-center">Nombre</th>
                                 <th style="width: 15%;" class="text-center">Ciudad</th>
-                                <th style="width: 40%;" class="text-center">Dirección</th>
-                                <th style="width: 15%;" class="text-center">Rol</th>
+                                <th style="width: 35%;" class="text-center">Dirección</th>
+                                <th style="width: 20%;" class="text-center">Dependencia</th>
                                 <th style="width: 5%;" class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -92,9 +92,9 @@
                                 oninput="this.value=mayusculas_espacio(this.value)">
                             </div>
                             <div class="mt-2">
-                                <label for="rol">Rol</label>
-                                <select name="rol" id="rol" class="form-select">
-                                    <option value="">Seleccione un rol</option>
+                                <label for="dependencia">Dependencia</label>
+                                <select name="dependencia" id="dependencia" class="form-select">
+                                    <option value="">Seleccione una dependencia</option>
                                 </select>
                             </div>
                         </form>

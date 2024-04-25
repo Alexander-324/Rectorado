@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="whote">
+<html lang="es" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roles</title>
+    <title>Áreas</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
@@ -18,13 +18,13 @@
     <div class="container" id="main">
         <div class="card">
             <div class="card-header">
-                <h3>Roles</h3>
+                <h3>Áreas</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive w-100">
-                    <table class="table table-hover table striped w-100 dt-responsive" id="tabla_roles">
+                    <table class="table table-hover table striped w-100 dt-responsive" id="tabla_areas">
                         <thead>
-                            <th style="width: 90%;">Roles</th>
+                            <th style="width: 90%;">Áreas</th>
                             <th>Acciones</th>
                         </thead>
                     </table>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <!-- Modal Nuevo | Editar -->
-    <div class="modal fade" id="modalRoles" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAreas" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -60,8 +60,8 @@
                 <div class="modal-body">
                         <div class="container">
                             <div>
-                                <label for="rol">Rol</label>
-                                <input type="text" name="rol" id="rol" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                                <label for="area">Área</label>
+                                <input type="text" name="area" id="area" class="form-control text-uppercase" autocomplete="off" maxlength="30">
                             </div>
                         </div>
                 </div>
@@ -79,7 +79,7 @@
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
-    <script src="../js/roles.js"></script>
+    <script src="../js/areas.js"></script>
 </body>
 
 </html>

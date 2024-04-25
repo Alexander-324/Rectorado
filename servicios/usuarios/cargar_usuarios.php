@@ -5,9 +5,10 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare(
-        "SELECT u.id_usuario, CONCAT(f.nombre, ' ', f.apellido) as nombre,
-        u.correo, u.foto, u.usuario
-        FROM usuarios u JOIN funcionarios f ON u.id_funcionario = f.id_funcionario;");
+        "SELECT u.id_usuario, CONCAT(u.nombre, ' ', u.apellido) as nombre, u.correo, u.foto,
+        r.rol, u.usuario
+        FROM usuarios u INNER JOIN roles r ON u.id_rol = r.id_rol"
+    );
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = [];
@@ -16,6 +17,7 @@ try {
             "id_usuario" => $datos["id_usuario"],
             "nombre" => $datos["nombre"],
             "correo" => $datos["correo"],
+            "rol" => $datos["rol"],
             "foto" => $datos["foto"],
             "usuario" => $datos["usuario"],
         );

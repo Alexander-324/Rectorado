@@ -17,6 +17,8 @@ toastr.options = {
 };
 
 let operacion = "";
+let usuario_valido = "";
+let password_valido = "no";
 let id_usuario = 0;
 // Variable para almacenar el id del funcionario
 let id_funcionario = 0;
@@ -34,9 +36,9 @@ $("#btn_nuevo").click(() => {
   $("#btn_buscar").prop("disabled", false);
 });
 
-$("#btn_salir").click(()=> {
+$("#btn_salir").click(() => {
   location.href = "../vistas/menu.php";
-})
+});
 
 siguienteClick($("#ci"), $("#btn_buscar"));
 
@@ -76,6 +78,21 @@ siguienteClick($("#ci"), $("#btn_buscar"));
 //   vistaPrevia(this);
 // });
 
+function comboRoles() {
+  $.ajax({
+    type: "POST",
+    url: "../servicios/roles/cargar_roles.php",
+    dataType: "json",
+    success: function (json) {
+      $.each(json, function (i, obj) {
+        $("#rol").append($("<option>").text(obj.rol).attr("value", obj.id_rol));
+      });
+    },
+  });
+}
+
+comboRoles();
+
 let usuarios;
 
 function cargarUsuarios() {
@@ -106,7 +123,7 @@ function cargarUsuarios() {
     },
     columnDefs: [
       {
-        targets: [2, 4],
+        targets: [3, 4],
         className: "dt-body-center",
       },
       {
@@ -120,7 +137,9 @@ function cargarUsuarios() {
     },
     columns: [
       { data: "nombre" },
+      { data: "usuario" },
       { data: "correo" },
+      { data: "rol" },
       {
         data: "foto",
         render: function (data) {
@@ -133,11 +152,10 @@ function cargarUsuarios() {
           );
         },
       },
-      { data: "usuario" },
       {
         data: null,
         defaultContent:
-          "<div class='container-fluid d-flex'> <a class='btn btn-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
+          "<div class='container d-flex'> <a class='btn btn-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
           "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
       },
     ],
@@ -196,19 +214,70 @@ $(document).on("click", ".perfil", function () {
 //   }
 // });
 
+function validarUsuario(usuario) {
+  $.ajax({
+    url: "../servicios/usuarios/verificar_usuario.php",
+    method: "POST",
+    data: { usuario: usuario },
+    dataType: "json",
+    success: function (json) {
+      if (json.existe == true) {
+        $("#error_usuario").text("Nombre de usuario no disponible");
+        $("#error_usuario").css("color", "#e63946");
+        usuario_valido = "no";
+        // $("#usuario").focus();
+      } else if (json.existe == false) {
+        $("#error_usuario").text("");
+        usuario_valido = "si";
+        console.log(json.mensaje);
+      } else if (json.error == true) {
+        console.log(json.mensaje);
+      }
+    },
+  });
+}
+
+function validarContrasenha() {
+  let password = $("#password").val();
+  if (validar_contrasenha(password) == false) {
+    $("#error_password").text("La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales");
+    $("#error_password").css("color", "#e63946");
+    console.log("no valido");
+    password_valido = "no";
+  } else {
+    $("#error_password").text("");
+    usuario_valido = "si";
+    console.log("valido");
+
+  }
+}
+
 function estaCargado() {
-  let funcionario = $("#funcionario").val();
+  let nombre = $("#nombre").val().toUpperCase();
+  let apellido = $("#apellido").val().toUpperCase();
   let correo = $("#correo").val();
+  let rol = $("#rol").val();
   let usuario = $("#usuario").val();
   let password = $("#password").val();
 
-  if (funcionario.length == 0) {
-    toastr.warning("Falta el nombre del funcionario.");
-    $("#ci").focus();
+  if (nombre.length == 0) {
+    toastr.warning("Ingrese un nombre.");
+    $("#nombre").focus();
+    return false;
+  } else if (apellido.length == 0) {
+    toastr.warning("Ingrese el apellido.");
+    $("#apellido").focus();
     return false;
   } else if (correo.length == 0) {
     toastr.warning("Ingrese un correo.");
     $("#correo").focus();
+    return false;
+  } else if (validarCorreo($("#correo").val()) == false) {
+    toastr.warning("Ingrese un correo valido.");
+    $("#correo").val();
+    return false;
+  } else if (rol == "") {
+    toastr.warning("Seleccione un rol.");
     return false;
   } else if (usuario.length == 0) {
     toastr.warning("Ingrese un nombre de usuario.");
@@ -224,17 +293,20 @@ function estaCargado() {
 }
 
 function guardar_usuario() {
-  if (estaCargado() == true) {
+  if (estaCargado() == true && usuario_valido == "si" && password_valido == "si") {
+    let nombre = $("#nombre").val().toUpperCase();
+    let apellido = $("#apellido").val().toUpperCase();
     $.ajax({
       url: "../servicios/usuarios/guardar_usuario.php",
       method: "POST",
-      data: 
-      {
-        id_funcionario: id_funcionario,
+      data: {
+        nombre: nombre,
+        apellido: apellido,
         correo: $("#correo").val(),
+        id_rol: $("#rol").val(),
         foto: "sin_perfil.jpg",
         usuario: $("#usuario").val(),
-        password: $("#password").val()
+        password: $("#password").val(),
       },
       dataType: "json",
       success: function (json) {
@@ -263,51 +335,53 @@ $(document).on("click", ".editar", function () {
     dataType: "json",
     success: function (json) {
       if (json.encontrado == true) {
-        $("#ci").prop("disabled", true);
-        $("#btn_buscar").prop("disabled", true);
-        $("#ci").val(json.ci);
-        $("#funcionario").val(json.nombre);
+        $("#nombre").val(json.nombre);
+        $("#apellido").val(json.apellido);
         $("#correo").val(json.correo);
+        $("#rol").val(json.id_rol);
         $("#usuario").val(json.usuario);
-        $("#password").val(json.password); 
+        $("#password").val(json.password);
       }
     },
   });
 });
 
 function modificar_usuario() {
-  if(estaCargado()) {
+  if (estaCargado()) {
     let correo = $("#correo").val().trim();
+    let id_rol = $("#rol").val();
     let usuario = $("#usuario").val().trim();
     let password = $("#password").val().trim();
     $.ajax({
       url: "../servicios/usuarios/modificar_usuario.php",
       method: "POST",
-      data:
-      {
+      data: {
+        nombre: nombre,
+        apellido: apellido,
         correo: correo,
+        id_rol: id_rol,
         usuario: usuario,
         password: password,
-        id_usuario: id_usuario
+        id_usuario: id_usuario,
       },
       dataType: "json",
-      success: function(json) {
-        if(json.modificado == true) {
+      success: function (json) {
+        if (json.modificado == true) {
           $("#modalUsuarios").modal("hide");
           usuarios.ajax.reload();
           successMessage(json.mensaje);
         } else {
           errorMessage(json.mensaje);
         }
-      }
-    })
+      },
+    });
   }
 }
 
 $("#btn_guardar").click(function () {
-  if(operacion == "Nuevo"){
+  if (operacion == "Nuevo") {
     guardar_usuario();
-  } else if(operacion == "Editar"){
+  } else if (operacion == "Editar") {
     modificar_usuario();
   }
 });
