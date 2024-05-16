@@ -36,9 +36,9 @@ $("#btn_nuevo").click(() => {
   $("#btn_buscar").prop("disabled", false);
 });
 
-$("#btn_salir").click(() => {
-  location.href = "../vistas/menu.php";
-});
+$("#btn_salir").click(function(){
+  location.href = "vistas/menu.php";
+})
 
 siguienteClick($("#ci"), $("#btn_buscar"));
 
@@ -136,7 +136,7 @@ function cargarUsuarios() {
       dataSrc: "",
     },
     columns: [
-      { data: "nombre" },
+      { data: "funcionario" },
       { data: "usuario" },
       { data: "correo" },
       { data: "rol" },
@@ -177,7 +177,7 @@ function buscar_funcionario() {
     dataType: "json",
     success: function (json) {
       if (json.tiene == false) {
-        id_funcionario = json.id_funcionario;
+        $("#id_funcionario").val(json.id_funcionario);
         $("#funcionario").val(json.nombre);
         $("#correo").focus();
       } else if (json.tiene == true) {
@@ -240,33 +240,29 @@ function validarUsuario(usuario) {
 function validarContrasenha() {
   let password = $("#password").val();
   if (validar_contrasenha(password) == false) {
-    $("#error_password").text("La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales");
+    $("#error_password").text(
+      "La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales"
+    );
     $("#error_password").css("color", "#e63946");
     console.log("no valido");
     password_valido = "no";
   } else {
     $("#error_password").text("");
-    usuario_valido = "si";
+    password_valido = "si";
     console.log("valido");
-
   }
 }
 
 function estaCargado() {
-  let nombre = $("#nombre").val().toUpperCase();
-  let apellido = $("#apellido").val().toUpperCase();
+  let funcionario = $("#funcionario").val();
   let correo = $("#correo").val();
   let rol = $("#rol").val();
   let usuario = $("#usuario").val();
   let password = $("#password").val();
 
-  if (nombre.length == 0) {
-    toastr.warning("Ingrese un nombre.");
-    $("#nombre").focus();
-    return false;
-  } else if (apellido.length == 0) {
-    toastr.warning("Ingrese el apellido.");
-    $("#apellido").focus();
+  if (funcionario.length == 0) {
+    toastr.warning("Falta el nombre del funcionario");
+    $("#ci").focus();
     return false;
   } else if (correo.length == 0) {
     toastr.warning("Ingrese un correo.");
@@ -293,17 +289,18 @@ function estaCargado() {
 }
 
 function guardar_usuario() {
-  if (estaCargado() == true && usuario_valido == "si" && password_valido == "si") {
-    let nombre = $("#nombre").val().toUpperCase();
-    let apellido = $("#apellido").val().toUpperCase();
+  if (
+    estaCargado() == true &&
+    usuario_valido == "si" &&
+    password_valido == "si"
+  ) {
     $.ajax({
       url: "../servicios/usuarios/guardar_usuario.php",
       method: "POST",
       data: {
-        nombre: nombre,
-        apellido: apellido,
         correo: $("#correo").val(),
         id_rol: $("#rol").val(),
+        id_funcionario: $("#id_funcionario").val(),
         foto: "sin_perfil.jpg",
         usuario: $("#usuario").val(),
         password: $("#password").val(),
@@ -335,10 +332,13 @@ $(document).on("click", ".editar", function () {
     dataType: "json",
     success: function (json) {
       if (json.encontrado == true) {
-        $("#nombre").val(json.nombre);
-        $("#apellido").val(json.apellido);
+        $("#btn_buscar").prop("disabled", true);
+        $("#ci").prop("disabled", true);
+        $("#ci").val(json.ci);
+        $("#funcionario").val(json.funcionario);
         $("#correo").val(json.correo);
         $("#rol").val(json.id_rol);
+        $("#id_funcionario").val(json.id_funcionario);
         $("#usuario").val(json.usuario);
         $("#password").val(json.password);
       }
@@ -356,8 +356,6 @@ function modificar_usuario() {
       url: "../servicios/usuarios/modificar_usuario.php",
       method: "POST",
       data: {
-        nombre: nombre,
-        apellido: apellido,
         correo: correo,
         id_rol: id_rol,
         usuario: usuario,

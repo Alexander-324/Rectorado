@@ -5,12 +5,11 @@ include("../conexion.php");
 try {
 
         $stmt = $conexion->prepare(
-        "INSERT INTO usuarios (nombre, apellido, correo, id_rol , foto, usuario, password) VALUES(?,?,?,?,?,?,?)");
+        "INSERT INTO usuarios (correo, id_rol, id_funcionario, foto, usuario, password) VALUES(?,?,?,?,?,?)");
         $stmt->execute(array(
-            $_POST["nombre"],
-            $_POST["apellido"],
             $_POST["correo"],
             $_POST["id_rol"],
+            $_POST["id_funcionario"],
             $_POST["foto"],
             $_POST["usuario"],
             $_POST["password"],

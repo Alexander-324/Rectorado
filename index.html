@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inicio de Sesión</title>
+    <title>RectorApp</title>
+    <link rel="icon" type="image/png" href="img/RectorApp.png">
+    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-icons.css" />
     <link rel="stylesheet" href="css/all.min.css" />
@@ -15,7 +17,8 @@
       <div class="d-flex justify-content-center mt-5">
         <div class="card w-25">
           <div class="card-hearder text-center">
-            <h3>Incio de Sesión</h3>
+            <img src="img/Logo_UNC.png" alt="Logo" class="logo"> <!-- Ruta de tu imagen de logo -->
+            <h3 class="titulo">Inicio de Sesión</h3>
           </div>
           <div class="card-body">
             <form action="#" id="form_login" autocomplete="off">
@@ -51,7 +54,7 @@
           </div>
           <div class="card-footer text-center">
             <button id="btn_acceder" class="btn btn-success" onclick="validarAcceso();">
-              INGRESAR
+              ACCEDER
             </button>
           </div>
         </div>

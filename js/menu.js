@@ -33,3 +33,6 @@ const WEEK = [
 $("#user_perfil").click(()=> {
   $("#modalPerfil").modal("show");
 })
+$("#btn_salir").click( function (){
+  location.href = "../index.html"
+})

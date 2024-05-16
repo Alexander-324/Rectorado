@@ -5,11 +5,9 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare(
-        "UPDATE usuarios SET nombre = ?, apellido = ?, correo = ?, id_rol = ? usuario = ?, password= ? WHERE id_usuario = ?"
+        "UPDATE usuarios SET correo = ?, id_rol = ?, usuario = ?, password= ? WHERE id_usuario = ?"
     );
     $stmt->execute(array(
-        $_POST["nombre"],
-        $_POST["apellido"],
         $_POST["correo"],
         $_POST["id_rol"],
         $_POST["usuario"],

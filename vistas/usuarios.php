@@ -27,7 +27,7 @@
                     <table class="table table-striped table-hover w-100" id="tabla_usuarios">
                         <thead>
                             <tr>
-                                <th style="width: 20%;" class="text-center">Nombre</th>
+                                <th style="width: 20%;" class="text-center">Funcionario</th>
                                 <th style="width: 20%;" class="text-center">Usuario</th>
                                 <th style="width: 20%;" class="text-center">Correo</th>
                                 <th style="width: 20%;" class="text-center">ROL</th>
@@ -66,13 +66,22 @@
                     <div class="container">
                         <form action="#" id="form_usuarios" enctype="multipart/form-data" autocomplete="off">
                             <div class="row d-flex">
-                                <div class="mt-2">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" name="nombre" id="nombre" class="form-control text-uppercase" maxlength="30">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="mt-2">
+                                            <label for="ci">C.I</label>
+                                            <input type="text" name="ci" id="ci" class="form-control text-uppercase text-end" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="mt-4">
+                                            <button type="button" class="btn btn-primary mt-2" id="btn_buscar" onclick="buscar_funcionario();" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buscar"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mt-2">
-                                    <label for="apellido">Apellido</label>
-                                    <input type="text" name="apellido" id="apellido" class="form-control text-uppercase" maxlength="30">
+                                    <label for="funcionario">Funcionario</label>
+                                    <input type="text" name="funcionario" id="funcionario" class="form-control" readonly>
                                 </div>
                                 <div class="mt-2">
                                     <label for="correo">Correo</label>
