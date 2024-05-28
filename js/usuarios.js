@@ -37,7 +37,7 @@ $("#btn_nuevo").click(() => {
 });
 
 $("#btn_salir").click(function(){
-  location.href = "vistas/menu.php";
+  location.href = "menu.php";
 })
 
 siguienteClick($("#ci"), $("#btn_buscar"));

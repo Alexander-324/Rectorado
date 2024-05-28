@@ -23,8 +23,51 @@
             <div class="card-body">
                 <div class="container">
                     <form action="#" id="form_expedientes">
-                        
+                        <div class="d-flex flex-column">
+                            <div class="mt-2">
+                                <label for="nro">Nro. Expediente</label>
+                                <input type="text" name="nro" id="nro" class="form-control" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10">
+                            </div>
+                            <div class="mt-2">
+                                <label for="nro">Fecha de Recepción</label>
+                                <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date("Y-m-d") ?>">
+                            </div>
+                            <div class="mt-2">
+                                <label for="area">Remitente</label>
+                                <select name="area" id="area" class="form-select">
+                                    <option value="">Seleccione un área</option>
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <label for="objeto">Objeto</label>
+                                <input type="text" name="objeto" id="objeto" class="form-control" oninput="this.value=mayusculas_espacio(this.value)" maxlength="100">
+                            </div>
+                            <div class="mt-2">
+                                <label for="dependencia">Dependencia</label>
+                                <select name="dependencia" id="dependencia" class="form-select">
+                                    <option value="">Seleccione una dependencia</option>
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <label for="observacion">Observación</label>
+                                <input type="text" name="observacion" id="observacion" class="form-control" oninput="this.value=mayusculas_espacio(this.value)" maxlength="100">
+                            </div>
+                            <div class="mt-2">
+                                <label for="recepcionado">Recepcionado por</label>
+                                <input type="text" name="recepcionado" id="recepcionado" class="form-control" readonly maxlength="100">
+                            </div>
+                        </div>
                     </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary" id="btn_guardar">Guardar</button>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" class="btn btn-danger" id="btn_salir">Salir</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -41,6 +41,8 @@ function validarAcceso() {
       success: function (json) {
         if (json.acceso === true) {
           // successMessage("Acceso Correcto.!!!");
+          localStorage.user = usuario;
+          localStorage.id_funcionario = json.id_funcionario;
           location.href = "vistas/menu.php";
         } else if (json.acceso === false) {
           toastr.warning("Usuario y/o contraseña incorrectos.!!!");

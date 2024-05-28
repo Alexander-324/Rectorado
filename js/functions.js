@@ -70,6 +70,11 @@ function warningMessage(mensaje) {
     max="<?= date("Y-m-d") ?>"
 */
 
+function fechaActual(fecha) {
+  var hoy = new Date().toISOString().split("T")[0];
+  fecha.val(hoy);
+}
+
 function formatear(num) {
   n = new Intl.NumberFormat("de-DE").format(num);
   return n;
@@ -179,5 +184,9 @@ function validar_contrasenha(password) {
 
 // Configuracion del Tooltip "Mensaje flotante" de Bootstrap
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);

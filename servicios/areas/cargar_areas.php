@@ -4,7 +4,7 @@ include ("../conexion.php");
 
 try {
 
-    $stmt = $conexion->prepare("SELECT * FROM areas ORDER BY area");
+    $stmt = $conexion->prepare("SELECT * FROM areas ORDER BY id_area");
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $salida = array();
