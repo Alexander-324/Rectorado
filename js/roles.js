@@ -26,6 +26,10 @@ $("#btn_nuevo").click(function () {
   operacion = "Nuevo";
 });
 
+$("#btn_salir").click(()=> {
+  location.href = "menu.php";
+})
+
 siguienteClick($("#rol"), $("#btn_guardar"));
 
 let roles;

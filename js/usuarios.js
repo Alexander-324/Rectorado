@@ -36,9 +36,9 @@ $("#btn_nuevo").click(() => {
   $("#btn_buscar").prop("disabled", false);
 });
 
-$("#btn_salir").click(function(){
+$("#btn_salir").click(() => {
   location.href = "menu.php";
-})
+});
 
 siguienteClick($("#ci"), $("#btn_buscar"));
 

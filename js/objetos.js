@@ -17,12 +17,13 @@ toastr.options = {
   };
   
   let operacion = "";
-  let id_dependencia = 0;
+  let id_objeto = 0;
   
   $("#btn_nuevo").click(function () {
-    $("#modalDependencias").modal("show");
-    $(".modal-title").text("Nueva Dependencia");
-    $("#dependencia").val("");
+    $("#modalObjetos").modal("show");
+    $(".modal-title").text("Nuevo Objeto");
+    $("#codigo").val("");
+    $("#objeto").val("");
     operacion = "Nuevo";
   });
 
@@ -30,12 +31,13 @@ toastr.options = {
     location.href = "menu.php";
   })
   
-  siguienteClick($("#dependencia"), $("#btn_guardar"));
+  siguienteCampo($("#codigo"), $("#objeto"));
+  siguienteClick($("#objeto"), $("#btn_guardar"));
   
-  let dependencias;
+  let objetos;
   
-  function cargarDependencias() {
-    dependencias = $("#tabla_dependencias").DataTable({
+  function cargarObjetos() {
+    objetos = $("#tabla_objetos").DataTable({
       language: {
         decimal: "",
         emptyTable: "No hay datos disponibles en la tabla",
@@ -62,16 +64,21 @@ toastr.options = {
       },
       columnDefs: [
         {
-          targets: [1],
+          targets: [2],
           className: "dt-body-center",
+        },
+        {
+            targets: [0],
+            className: "dt-body-right",
         },
       ],
       ajax: {
-        url: "../servicios/dependencias/cargar_dependencias.php",
+        url: "../servicios/objetos/cargar_objetos.php",
         dataSrc: "",
       },
       columns: [
-        { data: "dependencia" },
+        { data: "codigo" },
+        { data: "objeto" },
         {
           data: null,
           defaultContent:
@@ -80,33 +87,41 @@ toastr.options = {
         },
       ],
       createdRow: function (row, data) {
-        $("a.editar", row).attr("id", data.id_dependencia);
-        $("a.eliminar", row).attr("id", data.id_dependencia);
+        $("a.editar", row).attr("id", data.id_objeto);
+        $("a.eliminar", row).attr("id", data.id_objeto);
       },
     });
   }
   
-  cargarDependencias();
+  cargarObjetos();
   
-  function guardarDepencia() {
-    let dependencia = $("#dependencia").val().toUpperCase();
-    if (dependencia.length == 0) {
-      toastr.warning("Ingrese una dependencia.");
-      $("#dependencia").focus();
-    } else {
+  function guardarObjeto() {
+    let codigo = $("#codigo").val();
+    let objeto = $("#objeto").val().toUpperCase();
+    if (codigo.length == 0) {
+      toastr.warning("Ingrese un código.");
+      $("#codigo").focus();
+    } else if(objeto.length == 0) {
+        toastr.warning("Ingrese el objeto.");
+        $("#objeto").focus();
+    } else  {
       $.ajax({
-        url: "../servicios/dependencias/guardar_dependencia.php",
+        url: "../servicios/objetos/guardar_objeto.php",
         method: "POST",
-        data: { dependencia: dependencia },
+        data: 
+        { 
+            codigo: codigo,
+            objeto: objeto,
+        },
         dataType: "json",
         success: function (json) {
           if (json.guardado === true) {
             successMessage("Registro Insertado.");
-            dependencias.ajax.reload();
-            $("#modalDependencias").modal("hide");
+            objetos.ajax.reload();
+            $("#modalObjetos").modal("hide");
           } else if (json.existe === true) {
-            warningMessage("La dependencia ingresada ya existe");
-            $("#dependencia").focus();
+            warningMessage(json.mensaje);
+            $(json.focus).focus();
           } else {
             errorMessage(json.mensaje);
           }
@@ -116,45 +131,52 @@ toastr.options = {
   }
   
   $(document).on("click", ".editar", function () {
-    id_dependencia = $(this).attr("id");
-    $("#modalDependencias").modal("show");
-    $(".modal-title").text("Modificar Dependencias");
+    id_objeto = $(this).attr("id");
+    $("#modalObjetos").modal("show");
+    $(".modal-title").text("Modificar Objeto");
     $("#btn_guardar").text("Actualizar");
     operacion = "Editar";
     $.ajax({
-      url: "../servicios/dependencias/obtener_dependencia.php",
+      url: "../servicios/objetos/obtener_objeto.php",
       method: "POST",
-      data: { id_dependencia: id_dependencia },
+      data: { id_objeto: id_objeto },
       dataType: "json",
       success: function (json) {
         if (json.encontrado === true) {
-          $("#dependencia").val(json.dependencia);
+          $("#codigo").val(json.codigo);
+          $("#objeto").val(json.objeto);
         }
       },
     });
   });
   
-  function modificarDependencia() {
-    let dependencia = $("#dependencia").val().toUpperCase();
-    if (dependencia.length == 0) {
-      toastr.warning("Ingrese una dependencia.");
-      $("#dependencia").focus();
+  function modificarObjeto() {
+    let codigo = $("#codigo").val();
+    let objeto = $("#objeto").val().toUpperCase();
+    if (objeto.length == 0) {
+      toastr.warning("Ingrese el objeto.");
+      $("#objeto").focus();
+    } else if(codigo.length == 0) {
+        toastr.warning("Ingrese un código.");
+        $("#codigo").focus();
     } else {
       $.ajax({
-        url: "../servicios/dependencias/modificar_dependencia.php",
+        url: "../servicios/objetos/modificar_objeto.php",
         method: "POST",
         data: {
-          id_dependencia: id_dependencia,
-          dependencia: dependencia,
+          codigo: codigo,
+          objeto: objeto,
+          id_objeto: id_objeto,
         },
         dataType: "json",
         success: function (json) {
           if (json.modificado == true) {
-            $("#modalDependencias").modal("hide");
+            $("#modalObjetos").modal("hide");
             successMessage(json.mensaje);
-            dependencias.ajax.reload();
+            objetos.ajax.reload();
           } else if (json.existe == true) {
             warningMessage(json.mensaje);
+            $(json.focus).focus();
           } else {
             errorMessage(json.mensaje);
           }
@@ -165,9 +187,9 @@ toastr.options = {
   
   function operaciones() {
     if (operacion === "Nuevo") {
-      guardarDepencia();
+      guardarObjeto();
     } else if (operacion === "Editar") {
-      modificarDependencia();
+      modificarObjeto();
     }
   }
   
@@ -175,11 +197,11 @@ toastr.options = {
   
   $(document).on("click", ".eliminar", function () {
     // Se obtiene el id de la rol y se almacena en la variable id_rol
-    id_dependencia = $(this).attr("id");
+    id_objeto = $(this).attr("id");
     // Mensaje de confirmacion
     Swal.fire({
       title: "¡¡¡MENSAJE!!!",
-      text: "Esta seguro de eliminar esta dependencia?",
+      text: "Esta seguro de eliminar este objeto?",
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -190,14 +212,14 @@ toastr.options = {
       if (result.isConfirmed) {
         // Proceso de la llamada al script que se encarga de la eliminacion
         $.ajax({
-          url: "../servicios/dependencias/eliminar_dependencia.php",
+          url: "../servicios/objetos/eliminar_objeto.php",
           method: "POST",
-          data: { id_dependencia: id_dependencia },
+          data: { id_objeto: id_objeto },
           dataType: "json",
           success: function (json) {
             if (json.eliminado === true) {
               successMessage(json.mensaje);
-              dependencias.ajax.reload();
+              objetos.ajax.reload();
             } else {
               errorMessage(json.mensaje);
             }

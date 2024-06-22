@@ -38,9 +38,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-primary bg-transparent" id="btn_foto" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cambiar Foto de Perfil"><i class="fa-solid fa-user-pen"></i></button>
-              <button type="button" class="btn btn-outline-success bg-transparent" id="btn_datos" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Modificar Datos"><i class="fa-solid fa-pen-to-square"></i></button>
-              <button type="button" class="btn btn-outline-danger bg-transparent" id="btn_sesion" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+              <button type="button" class="btn btn-outline-primary" id="btn_foto" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cambiar Foto de Perfil"><i class="fa-solid fa-user-pen"></i></button>
+              <button type="button" class="btn btn-outline-success" id="btn_datos" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Modificar Datos"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-outline-danger" id="btn_sesion" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Sesión"><i class="bi bi-box-arrow-left"></i></button>
             </div>
           </div>
         </div>
@@ -51,11 +51,12 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="title_editar">Perfil de Usuario</h1>
+              <h1 class="modal-title fs-5" id="title_editar">Modal-title</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="div_datos">
-                <!-- <div class="mt-2">
+            <div class="modal-body">
+              <div id="div_datos">
+                <div class="mt-2">
                   <label for="ci_num">C.I</label>
                   <input type="text" name="ci_num" id="ci_num" class="form-control">
                 </div>
@@ -75,7 +76,24 @@
                 <div class="mt-2">
                   <label for="f_direccion">Dirección</label>
                   <input type="text" name="f_direccion" id="f_direccion" class="form-control">
-                </div> -->
+                </div>
+              </div>
+              <div id="div_password">
+                <div>
+                  <div class="mt-2">
+                    <label for="password">Contraseña Anterior</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" oninput="validarContrasenha()" />
+                      <button class="btn btn-primary border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
+                        <i class="fa fa-eye icono fw-bold"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="error_anterior" class="mt-1 fs-5">
+
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-success bg-transparent" id="btn_confirmar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Guardar"><i class="fa-solid fa-check"></i></button>
@@ -114,6 +132,7 @@
                     <li><a class="dropdown-item" href="usuarios.php">Usuarios</a></li>
                     <li><a class="dropdown-item" href="dependencias.php">Dependencias</a></li>
                     <li><a class="dropdown-item" href="areas.php">Áreas</a></li>
+                    <li><a class="dropdown-item" href="objetos.php">Objetos</a></li>
                   </ul>
                 </li>
                 <li class="nav-item dropdown">

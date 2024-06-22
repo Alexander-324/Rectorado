@@ -26,6 +26,10 @@ toastr.options = {
     operacion = "Nuevo";
   });
   
+  $("#btn_salir").click(()=> {
+    location.href = "menu.php";
+  })
+
   siguienteClick($("#area"), $("#btn_guardar"));
   
   let areas;

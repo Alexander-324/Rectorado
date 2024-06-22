@@ -41,7 +41,7 @@
                         </button>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-secondary " id="btn_nuevo">
+                        <button type="button" class="btn btn-secondary " id="btn_salir">
                             <i class="fa fa-x"> Salir</i>
                         </button>
                     </div>

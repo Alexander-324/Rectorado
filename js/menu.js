@@ -55,6 +55,7 @@ function userLogeado() {
         $("#p_direccion").text(json.direccion);
         $("#p_usuario").text(localStorage.user);
         $("#p_userPerfil").attr("src", "../img/usuarios/" + json.foto);
+        localStorage.id_funcionario = json.id_funcionario;
       }
     },
   });
@@ -64,35 +65,33 @@ userLogeado();
 
 // =============== Funcionalidad de Modal Editar Datos || Foto ================ \\
 
-let operacion = "";
+let op = "";
+
+function cargarComboCiudades() {
+  let combo_ciudades = $("#f_ciudad");
+  if (combo_ciudades.children().length > 0) {
+    combo_ciudades.empty();
+  }
+  $.ajax({
+    type: "POST",
+    url: "../servicios/ciudades/cargar_ciudades.php",
+    dataType: "json",
+    success: function (json) {
+      $.each(json, function (i, obj) {
+        $("#f_ciudad").append(
+          $("<option>").text(obj.ciudad).attr("value", obj.id_ciudad)
+        );
+      });
+    },
+  });
+}
 
 $("#btn_datos").click(function () {
-  operacion = "Datos";
+  op = "Datos";
   $("#modalPerfil").modal("hide");
   $("#modalEditar").modal("show");
   $("#title_editar").text("Editar Datos");
-  $("#div_datos").html(`
-  <div class="mt-2">
-  <label for="ci_num">C.I</label>
-  <input type="text" name="ci_num" id="ci_num" class="form-control">
-  </div>
-  <div class="mt-2">
-    <label for="f_nombre">Nombre</label>
-    <input type="text" name="f_nombre" id="f_nombre" class="form-control">
-  </div>
-<div class="mt-2">
-  <label for="f_apellido">Apellido</label>
-  <input type="text" name="f_apellido" id="f_apellido" class="form-control">
-</div>
-<div class="mt-2">
-  <label for="f_ciudad">Ciudad</label>
-  <select name="f_ciudad" id="f_ciudad" class="form-select">
-  </select>
-</div>
-<div class="mt-2">
-  <label for="f_direccion">Dirección</label>
-  <input type="text" name="f_direccion" id="f_direccion" class="form-control">
-  </div>`);
+  cargarComboCiudades();
   $.ajax({
     url: "../servicios/funcionarios/obtener_funcionario.php",
     method: "POST",
@@ -109,3 +108,12 @@ $("#btn_datos").click(function () {
     },
   });
 });
+
+function editar_datos() {
+  let ciNum = $("#ci_num").val();
+  let nom = $("f_nombre").val();
+  let ape = $("f_apellido").val();
+  let id_ciu = $("#f_ciudad").val();
+  let dir = $("#f_direccion").val();
+  
+}

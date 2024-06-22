@@ -84,6 +84,10 @@ $("#btn_nuevo").click(function () {
   $("#ciudad").val("");
 });
 
+$("#btn_salir").click(()=> {
+  location.href = "menu.php";
+})
+
 siguienteClick($("#ciudad"), $("#btn_guardar"))
 
 function guadarCiudad() {

@@ -43,7 +43,7 @@
                         <button type="button" class="btn btn-primary" id="btn_nuevo"><i class="fa fa-plus"></i> Nuevo</button>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-x"></i> Salir</button>
+                        <button type="button" class="btn btn-danger" id="btn_salir"><i class="fa fa-x"></i> Salir</button>
                     </div>
                 </div>
             </div>
