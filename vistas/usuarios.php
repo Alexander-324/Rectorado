@@ -107,12 +107,12 @@
                                     <label for="password">Contraseña</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" name="password" id="password" maxlength="30" oninput="validarContrasenha()" />
-                                        <button class="btn btn-primary border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
+                                        <button class="btn btn-dark border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
                                             <i class="fa fa-eye icono fw-bold"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <div id="error_password" class="mt-1 fs-5">
+                                <div id="error_password" class="mt-1 fs-6">
 
                                 </div>
                                 <div class="mt-2">

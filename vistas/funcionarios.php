@@ -30,7 +30,8 @@
                                 <th style="width: 5%;" class="text-center">C.I</th>
                                 <th style="width: 20%;" class="text-center">Nombre</th>
                                 <th style="width: 15%;" class="text-center">Ciudad</th>
-                                <th style="width: 35%;" class="text-center">Dirección</th>
+                                <th style="width: 25%;" class="text-center">Dirección</th>
+                                <th style="width: 10%;" class="text-center">Telefono</th>
                                 <th style="width: 20%;" class="text-center">Dependencia</th>
                                 <th style="width: 5%;" class="text-center">Acciones</th>
                             </tr>
@@ -90,6 +91,10 @@
                                 <label for="direcion">Dirección</label>
                                 <input type="text" name="direccion" id="direccion" class="form-control text-uppercase" autocomplete="off" maxlength="30"
                                 oninput="this.value=mayusculas_espacio(this.value)">
+                            </div>
+                            <div class="mt-2">
+                                <label for="telefono">Telefono</label>
+                                <input type="text" name="telefono" id="telefono" class="form-control">
                             </div>
                             <div class="mt-2">
                                 <label for="dependencia">Dependencia</label>

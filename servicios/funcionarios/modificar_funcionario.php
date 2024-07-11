@@ -35,7 +35,7 @@ try {
     if ($modify === true) {
 
         $stmt = $conexion->prepare("UPDATE funcionarios SET
-        ci = ?, nombre = ?, apellido = ?, id_ciudad = ?, direccion = ?, id_dependencia = ?
+        ci = ?, nombre = ?, apellido = ?, id_ciudad = ?, direccion = ?, telefono = ?, id_dependencia = ?
         WHERE id_funcionario = ?");
         $stmt->execute(array(
             $_POST["ci"],
@@ -43,6 +43,7 @@ try {
             $_POST["apellido"],
             $_POST["id_ciudad"],
             $_POST["direccion"],
+            $_POST["telefono"],
             $_POST["id_dependencia"],
             $_POST["id_funcionario"],
         ));

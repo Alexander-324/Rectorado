@@ -14,6 +14,7 @@ try {
             $salida["apellido"] = $datos["apellido"];
             $salida["id_ciudad"] = $datos["id_ciudad"];
             $salida["direccion"] = $datos["direccion"];
+            $salida["telefono"] = $datos["telefono"];
             $salida["id_dependencia"] = $datos["id_dependencia"];
             $salida["encontrado"] = true;
         

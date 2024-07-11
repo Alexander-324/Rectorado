@@ -8,6 +8,24 @@ const WEEK = [
   "SÁBADO",
 ];
 
+toastr.options = {
+  closeButton: false,
+  debug: false,
+  newestOnTop: false,
+  progressBar: false,
+  positionClass: "toast-top-center",
+  preventDuplicates: true,
+  onclick: null,
+  showDuration: "300",
+  hideDuration: "1000",
+  timeOut: "2000",
+  extendedTimeOut: "1000",
+  showEasing: "swing",
+  hideEasing: "linear",
+  showMethod: "fadeIn",
+  hideMethod: "fadeOut",
+};
+
 // function updateTime() {
 //   var now = new Date();
 
@@ -53,6 +71,7 @@ function userLogeado() {
         $("#p_dependencia").text(json.dependencia);
         $("#p_ciudad").text(json.ciudad);
         $("#p_direccion").text(json.direccion);
+        $("#p_telefono").text(json.telefono);
         $("#p_usuario").text(localStorage.user);
         $("#p_userPerfil").attr("src", "../img/usuarios/" + json.foto);
         localStorage.id_funcionario = json.id_funcionario;
@@ -66,6 +85,48 @@ userLogeado();
 // =============== Funcionalidad de Modal Editar Datos || Foto ================ \\
 
 let op = "";
+
+$("#div_datos").hide();
+$("#div_password").hide();
+$("#div_foto").hide();
+
+function vistaPrevia(foto) {
+  // Funcion que verifica y valida el formato de la imagen seleccionada
+
+  var extension = $("#foto").val().split(".").pop().toLowerCase();
+
+  if (jQuery.inArray(extension, ["png", "jpg", "jpeg"]) == -1) {
+    errorMessage(
+      "Formato no admitido. Seleccione una imagen con los siguientes formatos: gif, png, jpg, jpeg."
+    );
+  } else {
+    if (foto.files && foto.files[0]) {
+      //Revisamos que el input tenga contenido
+      var reader = new FileReader(); //Leemos el contenido
+
+      reader.onload = function (e) {
+        //Al cargar el contenido lo pasamos como atributo de la imagen de arriba
+        $("#span_vista").html(
+          '<img class="img-thumbnail" id="vista_previa" src="">'
+        );
+        $("#vista_previa").attr("src", e.target.result);
+        $("#vista_previa").css("width", "240px");
+        $("#vista_previa").css("height", "240px");
+        perfil = "si";
+        $("#perfil").val(perfil);
+        imagen = "si";
+        console.log(perfil);
+      };
+
+      reader.readAsDataURL(foto.files[0]);
+    }
+  }
+}
+
+$("#foto").change(function () {
+  //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
+  vistaPrevia(this);
+});
 
 function cargarComboCiudades() {
   let combo_ciudades = $("#f_ciudad");
@@ -86,11 +147,38 @@ function cargarComboCiudades() {
   });
 }
 
+/* Funcion que se encarga de mostrar los diversos formularios dentro del modal*/
+
+function menuOperaciones(operacion) {
+  switch (operacion) {
+    case "Datos":
+      $("#div_datos").show();
+      $("#div_foto").hide();
+      $("#div_password").hide();
+      break;
+    case "Foto":
+      $("#div_foto").show();
+      $("#div_datos").hide();
+      $("#div_password").hide();
+      break;
+    case "Password":
+      $("#div_password").show();
+      $("#div_foto").hide();
+      $("#div_datos").hide();
+      break;
+    default:
+      $("#div_password").hide();
+      $("#div_foto").hide();
+      $("#div_datos").hide();
+  }
+}
+
 $("#btn_datos").click(function () {
   op = "Datos";
   $("#modalPerfil").modal("hide");
   $("#modalEditar").modal("show");
-  $("#title_editar").text("Editar Datos");
+  $("#title_editar").text("Modificar Datos");
+  menuOperaciones(op);
   cargarComboCiudades();
   $.ajax({
     url: "../servicios/funcionarios/obtener_funcionario.php",
@@ -104,16 +192,170 @@ $("#btn_datos").click(function () {
         $("#f_apellido").val(json.apellido);
         $("#f_ciudad").val(json.id_ciudad);
         $("#f_direccion").val(json.direccion);
+        $("#f_telefono").val(json.telefono);
       }
     },
   });
 });
 
+
+
+
+$("#btn_password").click(function(){
+  op = "Password";
+  $("#modalPerfil").modal("hide");
+  $("#modalEditar").modal("show");
+  $("#title_editar").text("Modificar Contraseña");
+  menuOperaciones(op);
+
+})
+
 function editar_datos() {
   let ciNum = $("#ci_num").val();
-  let nom = $("f_nombre").val();
-  let ape = $("f_apellido").val();
+  let nom = $("#f_nombre").val();
+  let ape = $("#f_apellido").val();
   let id_ciu = $("#f_ciudad").val();
   let dir = $("#f_direccion").val();
-  
+  let tel = $("#f_telefono").val();
+  if (ciNum.length == 0) {
+    toastr.warning("El ci no debe quedar vacio.");
+    $("#ci_num").focus();
+  } else if (nom.length == 0) {
+    toastr.warning("El nombre no debe quedar vacio.");
+    $("#f_nombre").focus();
+  } else if (ape.length == 0) {
+    toastr.warning("El apellido no debe quedar vacio.");
+    $("#ci_num").focus();
+  } else if (id_ciu.length == 0) {
+    toastr.warning("Seleccione una ciudad.");
+  } else if (dir.length == 0) {
+    toastr.warning("La dirección no debe quedar vacio.");
+    $("#f_dir").focus();
+  } else if (tel.length == 0) {
+    toastr.warning("El telefono no debe quedar vacio.");
+    $("#f_telefono").focus();
+  } else {
+    $.ajax({
+      url: "../servicios/menu/editar_datos.php",
+      method: "POST",
+      data: {
+        ci: ciNum,
+        nombre: nom,
+        apellido: ape,
+        id_ciudad: id_ciu,
+        direccion: dir,
+        telefono: tel,
+        id_funcionario: localStorage.id_funcionario,
+      },
+      dataType: "json",
+      success: function (json) {
+        if (json.modificado == true) {
+          successMessage(json.mensaje);
+          userLogeado();
+          $("#modalEditar").modal("hide");
+          $("#modalPerfil").modal("show");
+        } else {
+          warningMessage(json.mensaje);
+        }
+      },
+    });
+  }
 }
+
+function modificar_perfil() {}
+
+// Variable para validar que la contraseña ingresada es valida
+let password_valido = false;
+// Variable para validar que la contraseña ingresada es la actual antes del cambio
+let puede = false;
+siguienteCtrl($("#anterior"), $("#bef"));
+siguienteCtrl($("#nueva"), $("#new"));
+siguienteCtrl($("#confirmar"), $("#conf"));
+
+function validarContrasenha() {
+  let password = $("#nueva").val();
+  if (validar_contrasenha(password) == false) {
+    $("#error_nuevo").text(
+      "La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales"
+    );
+    $("#error_nuevo").css("color", "#e63946");
+    console.log("no valido");
+    password_valido = "no";
+  } else {
+    $("#error_nuevo").text("");
+    password_valido = "si";
+    console.log("valido");
+  }
+}
+
+function verificar_contrasenha() {
+  let password = $("#anterior").val().trim();
+  $.ajax({
+    url: "../servicios/menu/verificar_password.php",
+    method: "POST",
+    data: { usuario: $("#p_usuario") },
+    dataType: "json",
+    success: function (json) {
+      if (password == json.password) {
+        $("#error_anterior").text("");
+        puede = true;
+        return true;
+      } else {
+        puede = false;
+        $("#error_anterior").text("Contraseña Incorrecta.");
+        $("#error_anterior").css("color", "#e63946");
+        return false;
+      }
+    },
+  });
+}
+
+function modificar_password() {
+  let usuario = $("#p_usuario").val();
+  let nueva = $("#nueva").val().trim();
+  let confirmar = $("#confirmar").val().trim();
+  if (password_valido == true) {
+    if(verificar_contrasenha() == true) {
+      $("#error_anterior").text("");
+    } else {
+      $("#error_anterior").text("Contraseña Incorrecta.");
+      $("#error_anterior").css("color", "#e63946");      
+    }
+    // if (nueva == confirmar) {
+    //   $.ajax({
+    //     url: "../servicios/menu/modificar_contrasenha.php",
+    //     method: "POST",
+    //     data: 
+    //     {
+    //       password: nueva,
+    //       usuario: usuario
+    //     },
+    //     dataType: "json",
+    //     success: function(json) {
+    //       if(json.modificado == true) {
+    //         successMensaje(json.mensaje);
+    //         location.href = "../index.html";
+    //       } else {
+    //         warningMessage(json.mensaje);
+    //       }
+    //     }
+    //   });
+    // } else {
+    //   toastr.warning("Las contraseñas no coinciden");
+    // }
+  }
+}
+
+$("#btn_confirmar").click(function () {
+  switch (op) {
+    case "Datos":
+      editar_datos();
+      break;
+    case "Foto":
+      modificar_perfil();
+      break;
+    case "Password":
+      modificar_password();
+      break;
+  }
+});

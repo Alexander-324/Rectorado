@@ -6,21 +6,22 @@ $salida = array();
 try {
 
     $stmt = $conexion->prepare("SELECT nro_expediente FROM expedientes WHERE nro_expediente = ?");
-    $stmt->execute($_POST["nro_expediente"]);
+    $stmt->execute(array($_POST["nro_expediente"]));
     if ($stmt->rowCount() > 0) {
         $salida["guardado"] = false;
-        $salida["mensaje"] = "El numero de expediente que ingreso ya existe.";
+        $salida["mensaje"] = "El numero e.";
     } else {
         $stmt = $conexion->prepare("INSERT INTO expedientes 
-        (nro_expediente, fecha_recepcion, id_area, objeto, id_dependencia, id_funcionario, estado)
-        VALUES(?,?,?,?,?,?)");
+        (nro_expediente, fecha_recepcion, id_area, id_objeto, id_dependencia, id_funcionario, observacion, estado)
+        VALUES(?,?,?,?,?,?,?,?)");
         $stmt->execute(array(
             $_POST["nro_expediente"],
             $_POST["fecha_recepcion"],
             $_POST["id_area"],
-            $_POST["objeto"],
+            $_POST["id_objeto"],
             $_POST["id_dependencia"],
             $_POST["id_funcionario"],
+            $_POST["observacion"],
             $_POST["estado"],
         ));
 

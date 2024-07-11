@@ -5,7 +5,7 @@ include("../conexion.php");
 try {
 
     $stmt = $conexion->prepare("SELECT f.id_funcionario, f.ci, 
-    CONCAT(f.nombre, ' ', f.apellido) as nombre, c.ciudad, f.direccion, d.dependencia
+    CONCAT(f.nombre, ' ', f.apellido) as nombre, c.ciudad, f.direccion, f.telefono, d.dependencia
     FROM funcionarios f JOIN ciudades c ON f.id_ciudad = c.id_ciudad JOIN dependencias d
     ON f.id_dependencia = d.id_dependencia;");
     $stmt->execute();
@@ -18,6 +18,7 @@ try {
             "nombre" => $datos["nombre"],
             "ciudad" => $datos["ciudad"],
             "direccion" => $datos["direccion"],
+            "telefono" => $datos["telefono"],
             "dependencia" => $datos["dependencia"],
         );
     }

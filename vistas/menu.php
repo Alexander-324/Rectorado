@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/bootstrap-icons.css">
   <link rel="stylesheet" href="../css/all.min.css">
+  <link rel="stylesheet" href="../css/toastr.min.css">
+  <link rel="stylesheet" href="../css/sweetalert2.min.css">
   <link rel="stylesheet" href="../css/menu.css">
 </head>
 
@@ -21,6 +23,8 @@
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.bundle.min.js"></script>
   <script src="../js/all.min.js"></script>
+  <script src="../js/toastr.js"></script>
+  <script src="../js/sweetalert2.all.min.js"></script>
   <script src="../js/functions.js"></script>
   <script src="../js/menu.js"></script>
 </body>

@@ -5,7 +5,7 @@
     try {
 
         $stmt = $conexion->prepare("SELECT f.ci, CONCAT(f.nombre,' ',f.apellido) as nombre,
-        r.rol, d.dependencia, c.ciudad, f.direccion, u.foto, f.id_funcionario
+        r.rol, d.dependencia, c.ciudad, f.direccion, f.telefono, u.foto, f.id_funcionario
         FROM usuarios u JOIN roles r
         ON u.id_rol = r.id_rol JOIN funcionarios f
         ON u.id_funcionario = f.id_funcionario JOIN ciudades c

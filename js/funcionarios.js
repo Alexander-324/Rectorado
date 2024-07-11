@@ -55,7 +55,9 @@ function comboDependencias() {
     dataType: "json",
     success: function (json) {
       $.each(json, function (i, obj) {
-        $("#dependencia").append($("<option>").text(obj.dependencia).attr("value", obj.id_dependencia));
+        $("#dependencia").append(
+          $("<option>").text(obj.dependencia).attr("value", obj.id_dependencia)
+        );
       });
     },
   });
@@ -104,12 +106,12 @@ function cargarFuncionarios() {
       },
       // Alineamos la columna de los botones en el centro
       {
-        targets: [5],
+        targets: [6],
         className: "dt-body-center",
       },
       // Asignamos el tamaño de la fuente para los datos de todas las filas
       {
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
         className: "font",
       },
     ],
@@ -122,6 +124,7 @@ function cargarFuncionarios() {
       { data: "nombre" },
       { data: "ciudad" },
       { data: "direccion" },
+      { data: "telefono" },
       { data: "dependencia" },
       {
         data: null,
@@ -140,11 +143,12 @@ function cargarFuncionarios() {
 cargarFuncionarios();
 
 function esta_cargado() {
-  let ci = $("#ci").val();
-  let nombre = $("#nombre").val().toUpperCase();
-  let apellido = $("#apellido").val().toUpperCase();
+  let ci = $("#ci").val().trim();
+  let nombre = $("#nombre").val().toUpperCase().trim();
+  let apellido = $("#apellido").val().toUpperCase().trim();
   let id_ciudad = $("#ciudad").val();
-  let direccion = $("#direccion").val().toUpperCase();
+  let direccion = $("#direccion").val().toUpperCase().trim();
+  let telefono = $("#telefono").val().trim();
   let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
@@ -167,6 +171,10 @@ function esta_cargado() {
     toastr.warning("Ingrese la direccion.");
     $("#direccion").focus();
     return false;
+  } else if (telefono.length == 0) {
+    toastr.warning("Ingrese el telefono.");
+    $("#telefono").focus();
+    return false;
   } else if (id_dependencia.length == 0) {
     toastr.warning("Seleccione una dependencia.");
     return false;
@@ -176,11 +184,12 @@ function esta_cargado() {
 }
 
 function guardar_funcionario() {
-  let ci = $("#ci").val();
-  let nombre = $("#nombre").val().toUpperCase();
-  let apellido = $("#apellido").val().toUpperCase();
+  let ci = $("#ci").val().trim();
+  let nombre = $("#nombre").val().toUpperCase().trim();
+  let apellido = $("#apellido").val().toUpperCase().trim();
   let id_ciudad = $("#ciudad").val();
-  let direccion = $("#direccion").val().toUpperCase();
+  let direccion = $("#direccion").val().toUpperCase().trim();
+  let telefono = $("#telefono").val().toUpperCase().trim();
   let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
@@ -195,6 +204,7 @@ function guardar_funcionario() {
         apellido: apellido,
         id_ciudad: id_ciudad,
         direccion: direccion,
+        telefono: telefono,
         id_dependencia: id_dependencia,
       },
       dataType: "json",
@@ -236,6 +246,7 @@ $(document).on("click", ".editar", function () {
         $("#apellido").val(json.apellido);
         $("#ciudad").val(json.id_ciudad);
         $("#direccion").val(json.direccion);
+        $("#telefono").val(json.telefono);
         $("#dependencia").val(json.id_dependencia);
       } else {
         // Mostramos el error si hubiese
@@ -246,11 +257,12 @@ $(document).on("click", ".editar", function () {
 });
 
 function modificar_funcionario() {
-  let ci = $("#ci").val();
-  let nombre = $("#nombre").val().toUpperCase();
-  let apellido = $("#apellido").val().toUpperCase();
+  let ci = $("#ci").val().trim();
+  let nombre = $("#nombre").val().toUpperCase().trim();
+  let apellido = $("#apellido").val().toUpperCase().trim();
   let id_ciudad = $("#ciudad").val();
-  let direccion = $("#direccion").val().toUpperCase();
+  let direccion = $("#direccion").val().toUpperCase().trim();
+  let telefono = $("#telefono").val().toUpperCase().trim();
   let id_dependencia = $("#dependencia").val();
 
   // Validamos si todos los campos han sido cargados
@@ -265,6 +277,7 @@ function modificar_funcionario() {
         apellido: apellido,
         id_ciudad: id_ciudad,
         direccion: direccion,
+        telefono: telefono,
         id_dependencia: id_dependencia,
         // Enviamos la variable id_fun que contiene el id del funcionario que estamos modificando
         id_funcionario: id_fun,
@@ -279,7 +292,7 @@ function modificar_funcionario() {
         } else if (json.modificado == false) {
           // En caso contrario mostramos el error
           errorMessage(json.mensaje);
-        } else if(json.existe == true) {
+        } else if (json.existe == true) {
           $("#ci").focus();
           warningMessage(json.mensaje);
         }
@@ -296,7 +309,7 @@ $("#btn_guardar").click(() => {
   }
 });
 
-$(document).on("click", ".eliminar", function() {
+$(document).on("click", ".eliminar", function () {
   id_fun = $(this).attr("id");
   Swal.fire({
     title: "!!!MENSAJE¡¡¡",

@@ -24,13 +24,13 @@
                   <b>DIRECCIÓN: </b><span id="p_direccion"></span>
                 </span>
                 <span>
+                  <b>TELEFONO: </b><span id="p_telefono"></span>
+                </span>
+                <span>
                   <b>ROL: </b><span id="p_rol"></span>
                 </span>
                 <span>
                   <b>USUARIO: </b><span id="p_usuario"></span>
-                </span>
-                <span>
-                  <b>USUARIO: </b><span id="p_idUsuario"></span>
                 </span>
                 <div class="text-center mt-2">
                   <img src="#" class="img-fluid rounded" id="p_userPerfil" width="200" height="200">
@@ -38,8 +38,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-primary" id="btn_foto" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cambiar Foto de Perfil"><i class="fa-solid fa-user-pen"></i></button>
-              <button type="button" class="btn btn-outline-success" id="btn_datos" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Modificar Datos"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-outline-primary" id="btn_datos" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Modificar Datos"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-outline-success" id="btn_foto" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cambiar Foto de Perfil"><i class="fa-solid fa-user-gear"></i></button>
+              <button type="button" class="btn btn-outline-warning" id="btn_password" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cambiar Contraseña"><i class="fa-solid fa-rotate"></i></button>
               <button type="button" class="btn btn-outline-danger" id="btn_sesion" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Sesión"><i class="bi bi-box-arrow-left"></i></button>
             </div>
           </div>
@@ -77,20 +78,56 @@
                   <label for="f_direccion">Dirección</label>
                   <input type="text" name="f_direccion" id="f_direccion" class="form-control">
                 </div>
+                <div class="mt-2">
+                  <label for="f_telefono">Telefono</label>
+                  <input type="text" name="f_telefono" id="f_telefono" class="form-control">
+                </div>
               </div>
               <div id="div_password">
                 <div>
                   <div class="mt-2">
                     <label for="password">Contraseña Anterior</label>
                     <div class="input-group">
-                      <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" oninput="validarContrasenha()" />
-                      <button class="btn btn-primary border-0" type="button" id="hide-show" onclick="mostrarPassword('password', 'icono')">
-                        <i class="fa fa-eye icono fw-bold"></i>
+                      <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" />
+                      <button class="btn btn-dark border-0" type="button" id="bef" onclick="mostrarPassword('anterior', 'eye_anterior')">
+                        <i class="fa fa-eye eye_anterior fw-bold"></i>
                       </button>
                     </div>
                   </div>
-                  <div id="error_anterior" class="mt-1 fs-5">
-
+                  <div id="error_anterior" class="mt-1 fs-6">
+                  </div>
+                </div>
+                <div>
+                  <div class="mt-2">
+                    <label for="password">Nueva Contraseña</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="nueva" id="nueva" maxlength="30" oninput="validarContrasenha()" />
+                      <button class="btn btn-dark border-0" type="button" id="new" onclick="mostrarPassword('nueva', 'eye_nuevo')">
+                        <i class="fa fa-eye eye_nuevo fw-bold"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="error_nuevo" class="mt-1 fs-6">
+                  </div>
+                </div>
+                <div>
+                  <div class="mt-2">
+                    <label for="password">Confirmar Contraseña</label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="confirmar" id="confirmar" maxlength="30" />
+                      <button class="btn btn-dark border-0" type="button" id="conf" onclick="mostrarPassword('confirmar', 'eye_confirmar')">
+                        <i class="fa fa-eye eye_confirmar fw-bold"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="div_foto">
+                <div>
+                  <input type="file" class="form-control" id="foto" name="foto">
+                  <div class="mt-2 text-center">
+                    <span id="span_vista">
+                    </span>
                   </div>
                 </div>
               </div>

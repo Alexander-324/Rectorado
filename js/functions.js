@@ -47,6 +47,15 @@ function successMessage(mensaje) {
     timer: "1500",
   });
 }
+function successMensaje(mensaje) {
+  Swal.fire({
+    title: "!!!MENSAJE!!!",
+    text: mensaje,
+    icon: "success",
+    showConfirmButton: false,
+    timer: "1500",
+  });
+}
 
 function errorMessage(mensaje) {
   Swal.fire({

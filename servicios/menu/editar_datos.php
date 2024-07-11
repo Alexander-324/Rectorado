@@ -35,7 +35,7 @@ try {
     if ($modify === true) {
 
         $stmt = $conexion->prepare("UPDATE funcionarios SET
-        ci = ?, nombre = ?, apellido = ?, id_ciudad = ?, direccion = ?
+        ci = ?, nombre = ?, apellido = ?, id_ciudad = ?, direccion = ?, telefono = ?
         WHERE id_funcionario = ?");
         $stmt->execute(array(
             $_POST["ci"],
@@ -43,12 +43,13 @@ try {
             $_POST["apellido"],
             $_POST["id_ciudad"],
             $_POST["direccion"],
+            $_POST["telefono"],
             $_POST["id_funcionario"],
         ));
 
         $salida = array(
             "modificado" => true,
-            "mensaje" => "Registro Modificado.!!!"
+            "mensaje" => "Datos Actualizados.!!!"
         );
     }
 } catch (PDOException $e) {

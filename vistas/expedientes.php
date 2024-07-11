@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,9 @@
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/toastr.min.css">
 </head>
+
 <body>
-    
+
     <?php include("sidebar.php") ?>
 
     <div class="container w-50" id="main">
@@ -39,8 +41,17 @@
                                 </select>
                             </div>
                             <div class="mt-2">
-                                <label for="objeto">Objeto</label>
-                                <input type="text" name="objeto" id="objeto" class="form-control" oninput="this.value=mayusculas_espacio(this.value)" maxlength="100">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <label for="objetos">Objeto</label>
+                                        <select name="objetos" id="objetos" class="form-select">
+                                            <option value="">Seleccione un Objeto</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-1 mt-4">
+                                        <button type="button" class="btn btn-outline-primary bg-transparent" id="btn_objeto" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar Objeto"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-2">
                                 <label for="dependencia">Dependencia</label>
@@ -73,6 +84,27 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalConfirmar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Verificación de Usuario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <label for="ci">C.I</label>
+                        <input type="text" name="ci" id="ci" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn_conf">Confirmar</button>
+                    <button type="button" class="btn btn-danger" id="btn_cancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/datatables.min.js"></script>
@@ -83,4 +115,5 @@
     <script src="../js/expedientes.js"></script>
 
 </body>
+
 </html>

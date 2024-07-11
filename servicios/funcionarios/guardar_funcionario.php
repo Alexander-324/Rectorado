@@ -15,13 +15,14 @@ try {
     } else {
         
         $stmt = $conexion->prepare("INSERT INTO funcionarios 
-        (ci, nombre, apellido, id_ciudad, direccion, id_dependencia) VALUES(?,?,?,?,?,?)");
+        (ci, nombre, apellido, id_ciudad, direccion, telefono, id_dependencia) VALUES(?,?,?,?,?,?,?)");
         $stmt->execute(array(
             $_POST["ci"],
             $_POST["nombre"],
             $_POST["apellido"],
             $_POST["id_ciudad"],
             $_POST["direccion"],
+            $_POST["telefono"],
             $_POST["id_dependencia"],
         ));
 
