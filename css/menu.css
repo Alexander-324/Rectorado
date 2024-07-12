@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI';
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -87,7 +87,7 @@ body {
 
 
 /* Estilo para la tabla */
-#tabla_ciudades {
+.table {
     border-collapse: collapse;
     width: 100%;
   }
@@ -133,9 +133,9 @@ body {
 /* Estilo cuando el cursor está sobre el botón Nuevo */
   #btn_nuevo, .editar:hover {
     transform: scale(1.05); /* Agrandar un poco el botón */
-    box-shadow: 0 4px 8px rgba(23, 180, 31, 0.1); /* Agregar una sombra suave */
-    background-color: #cad2c5; /* Cambiar el color de fondo a rojo brillante */
-    color: #000;
+    /* box-shadow: 0 4px 8px rgba(23, 180, 31, 0.1); Agregar una sombra suave */
+    /* background-color: #cad2c5; Cambiar el color de fondo a rojo brillante */
+    /* color: #000; */
   }
   
 /* Estilo para el botón Salir */
@@ -146,17 +146,9 @@ body {
     outline: none; /* Quitar el borde predeterminado */
   }
   
-/* Estilo cuando el cursor está sobre el botón Salir */
-  .btn-danger:hover {
-    transform: scale(1.05); /* Agrandar un poco el botón */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Agregar una sombra suave */
-    background-color: #cad2c5; /* Cambiar el color de fondo a rojo brillante */
-    color: #000;
-  }
 /* Estilo para el botón Salir */
 .btn-secondary {
     /* background-color: #dc3545; Cambiar el color de fondo a rojo */
-    color: #fff; /* Cambiar el color del texto a blanco */
     transition: all 0.3s; /* Agregar una transición suave */
     outline: none; /* Quitar el borde predeterminado */
   }
@@ -250,3 +242,6 @@ body {
   cursor: pointer;
 }
 
+.btn {
+  color: #fff;
+}

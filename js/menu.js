@@ -86,6 +86,10 @@ userLogeado();
 
 let op = "";
 
+$("#btn_sesion").click(()=> {
+  location.href = "../index.html";
+})
+
 $("#div_datos").hide();
 $("#div_password").hide();
 $("#div_foto").hide();

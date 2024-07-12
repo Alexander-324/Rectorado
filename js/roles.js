@@ -26,9 +26,9 @@ $("#btn_nuevo").click(function () {
   operacion = "Nuevo";
 });
 
-$("#btn_salir").click(()=> {
+$("#btn_salir").click(() => {
   location.href = "menu.php";
-})
+});
 
 siguienteClick($("#rol"), $("#btn_guardar"));
 
@@ -75,8 +75,8 @@ function cargarRoles() {
       {
         data: null,
         defaultContent:
-          "<div class='container-fluid d-flex'> <a class='btn btn-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
-          "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
+          "<div class='container-fluid d-flex'> <a class='btn btn-outline-primary editar'><i class='fa fa-pen-to-square'></i> </a>" +
+          "<a class='btn btn-outline-danger eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
       },
     ],
     createdRow: function (row, data) {

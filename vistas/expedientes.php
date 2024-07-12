@@ -74,18 +74,44 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary" id="btn_guardar">Guardar</button>
+                        <button type="button" class="btn btn-outline-primary" id="btn_guardar">Guardar</button>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-danger" id="btn_salir">Salir</button>
+                        <button type="button" class="btn btn-outline-danger" id="btn_salir">Salir</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalConfirmar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal Confirmar Usuario -->
+    <div class="modal fade" id="modalNuevoObj" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Objeto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label for="codigo">Código</label>
+                        <input type="text" name="codigo" id="codigo" class="form-control" autocomplete="off" oninput="this.value=solo_numeros_sin_cero(this.value)">
+                    </div>
+                    <div class="mt-2">
+                        <label for="obj">Objeto</label>
+                        <input type="text" name="obj" id="obj" class="form-control text-uppercase" oninput="this.value=mayusculas_espacio(this.value)" maxlength="80">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" id="btn_guardarObj">Guardar</button>
+                    <button type="button" class="btn btn-outline-danger" id="btn_cancelarObj">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Objeto -->
+    <div class="modal fade" id="modalConfirmar" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -93,13 +119,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <label for="ci">C.I</label>
-                        <input type="text" name="ci" id="ci" class="form-control">
-                    </div>
+                    <label for="ci">C.I</label>
+                    <input type="text" name="ci" id="ci" class="form-control">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_conf">Confirmar</button>
-                    <button type="button" class="btn btn-danger" id="btn_cancelar">Cancelar</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn_conf">Confirmar</button>
+                    <button type="button" class="btn btn-outline-danger" id="btn_cancelar">Cancelar</button>
                 </div>
             </div>
         </div>

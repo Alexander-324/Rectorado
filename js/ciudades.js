@@ -63,8 +63,8 @@ function cargarCiudades() {
       {
         data: null,
         defaultContent:
-          "<div class='container d-flex'><a class='btn btn-primary neon-btn editar me-2'><i class='fa fa-pen-to-square'></i> </a>" +
-          "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a></div>",
+          "<div class='container d-flex'><a class='btn btn-outline-primary  editar me-2'><i class='fa fa-pen-to-square'></i> </a>" +
+          "<a class='btn btn-outline-danger eliminar ms-2'><i class='fa fa-trash'></i> </a></div>",
       },
     ],
     createdRow: function (row, data) {
@@ -84,9 +84,9 @@ $("#btn_nuevo").click(function () {
   $("#ciudad").val("");
 });
 
-$("#btn_salir").click(()=> {
+$("#btn_salir").click(() => {
   location.href = "menu.php";
-})
+});
 
 siguienteClick($("#ciudad"), $("#btn_guardar"))
 

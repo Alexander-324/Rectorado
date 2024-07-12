@@ -36,14 +36,10 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary" id="btn_nuevo">
-                            <i class="fa fa-plus"> Nuevo</i>
-                        </button>
+                        <button type="button" class="btn btn-outline-primary" id="btn_nuevo">Nuevo</button>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-secondary " id="btn_salir">
-                            <i class="fa fa-x"> Salir</i>
-                        </button>
+                        <button type="button" class="btn btn-outline-danger" id="btn_salir">Salir</button>
                     </div>
                 </div>
             </div>
@@ -58,16 +54,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <div class="container">
-                            <div>
-                                <label for="rol">Rol</label>
-                                <input type="text" name="rol" id="rol" class="form-control text-uppercase" autocomplete="off" maxlength="30">
-                            </div>
+                    <div class="container">
+                        <div>
+                            <label for="rol">Rol</label>
+                            <input type="text" name="rol" id="rol" class="form-control text-uppercase" autocomplete="off" maxlength="30">
                         </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_guardar" onclick="operaciones()">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-primary" id="btn_guardar" onclick="operaciones()">Guardar</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

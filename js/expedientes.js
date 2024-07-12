@@ -22,6 +22,10 @@ $(document).ready(function () {
   let ope = "";
   let verificado = false;
 
+  $("#btn_salir").click(() => {
+    location.href = "menu.php";
+  });
+
   function comboAreas() {
     $.ajax({
       type: "POST",
@@ -59,11 +63,18 @@ $(document).ready(function () {
   comboDependencias();
 
   function comboObjetos() {
+    let combo_objetos = $("#objetos");
+    if (combo_objetos.children().length > 0) {
+      combo_objetos.empty();
+    }
     $.ajax({
       type: "POST",
       url: "../servicios/objetos/cargar_objetos.php",
       dataType: "json",
       success: function (json) {
+        $("#objetos").append(
+          $("<option>").text("Seleccione un objeto").attr("value", "")
+        );
         $.each(json, function (i, obj) {
           $("#objetos").append(
             $("<option>").text(obj.objeto).attr("value", obj.id_objeto)
@@ -158,7 +169,9 @@ $(document).ready(function () {
             verificado = false;
             $("#form_expedientes")[0].reset();
             $("#nro").focus();
+            fechaActual($("#fecha"));
           } else {
+            $("#nro").focus();
             warningMessage(json.mensaje);
           }
         },
@@ -169,6 +182,7 @@ $(document).ready(function () {
   $("#btn_guardar").click(function () {
     if (cargado() == true) {
       $("#modalConfirmar").modal("show");
+      $("#ci").val("");
     }
   });
 
@@ -194,5 +208,47 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  $("#btn_objeto").click(function () {
+    $("#modalNuevoObj").modal("show");
+  });
+
+  function guardarObjeto() {
+    let codigo = $("#codigo").val();
+    let objeto = $("#obj").val().toUpperCase();
+    if (codigo.length == 0) {
+      toastr.warning("Ingrese un código.");
+      $("#codigo").focus();
+    } else if (objeto.length == 0) {
+      toastr.warning("Ingrese el objeto.");
+      $("#objeto").focus();
+    } else {
+      $.ajax({
+        url: "../servicios/objetos/guardar_objeto.php",
+        method: "POST",
+        data: {
+          codigo: codigo,
+          objeto: objeto,
+        },
+        dataType: "json",
+        success: function (json) {
+          if (json.guardado === true) {
+            successMessage("Nuevo Objeto Registrado.");
+            $("#modalNuevoObj").modal("hide");
+            comboObjetos();
+          } else if (json.existe === true) {
+            warningMessage(json.mensaje);
+            $(json.focus).focus();
+          } else {
+            errorMessage(json.mensaje);
+          }
+        },
+      });
+    }
+  }
+
+  $("#btn_guardarObj").click(function () {
+    guardarObjeto();
   });
 });

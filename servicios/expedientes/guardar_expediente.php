@@ -9,7 +9,7 @@ try {
     $stmt->execute(array($_POST["nro_expediente"]));
     if ($stmt->rowCount() > 0) {
         $salida["guardado"] = false;
-        $salida["mensaje"] = "El numero e.";
+        $salida["mensaje"] = "El numero de expediente ingresado ya existe.";
     } else {
         $stmt = $conexion->prepare("INSERT INTO expedientes 
         (nro_expediente, fecha_recepcion, id_area, id_objeto, id_dependencia, id_funcionario, observacion, estado)

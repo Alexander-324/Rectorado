@@ -27,9 +27,9 @@ toastr.options = {
     operacion = "Nuevo";
   });
 
-  $("#btn_salir").click(()=> {
+  $("#btn_salir").click(() => {
     location.href = "menu.php";
-  })
+  });
   
   siguienteCampo($("#codigo"), $("#objeto"));
   siguienteClick($("#objeto"), $("#btn_guardar"));
@@ -82,8 +82,8 @@ toastr.options = {
         {
           data: null,
           defaultContent:
-            "<div class='container-fluid d-flex'> <a class='btn btn-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
-            "<a class='btn btn-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
+            "<div class='container-fluid d-flex'> <a class='btn btn-outline-primary neon-btn editar'><i class='fa fa-pen-to-square'></i> </a>" +
+            "<a class='btn btn-outline-danger neon-btn eliminar ms-2'><i class='fa fa-trash'></i> </a> </div>",
         },
       ],
       createdRow: function (row, data) {
