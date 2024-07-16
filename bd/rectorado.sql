@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2024 a las 17:14:39
+-- Tiempo de generación: 16-07-2024 a las 18:18:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -137,6 +137,7 @@ CREATE TABLE `expedientes` (
   `íd_expediente` int(11) NOT NULL,
   `nro_expediente` int(11) NOT NULL,
   `fecha_recepcion` date NOT NULL,
+  `anio_recepcion` int(11) NOT NULL DEFAULT 2000,
   `id_area` int(11) NOT NULL,
   `id_objeto` int(11) NOT NULL,
   `id_dependencia` int(11) NOT NULL,
@@ -149,9 +150,9 @@ CREATE TABLE `expedientes` (
 -- Volcado de datos para la tabla `expedientes`
 --
 
-INSERT INTO `expedientes` (`íd_expediente`, `nro_expediente`, `fecha_recepcion`, `id_area`, `id_objeto`, `id_dependencia`, `id_funcionario`, `observacion`, `estado`) VALUES
-(1, 178, '2024-07-11', 1, 1, 9, 1, 'NINGUNA', 'enviado a rectorado'),
-(2, 176, '2024-07-12', 1, 3, 9, 1, 'NINGUNA', 'enviado a rectorado');
+INSERT INTO `expedientes` (`íd_expediente`, `nro_expediente`, `fecha_recepcion`, `anio_recepcion`, `id_area`, `id_objeto`, `id_dependencia`, `id_funcionario`, `observacion`, `estado`) VALUES
+(1, 178, '2024-07-11', 2000, 1, 1, 9, 1, 'NINGUNA', 'enviado a rectorado'),
+(2, 176, '2024-07-12', 2000, 1, 3, 9, 1, 'NINGUNA', 'enviado a rectorado');
 
 -- --------------------------------------------------------
 
@@ -214,6 +215,22 @@ CREATE TABLE `pantallas` (
   `pantalla` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pantallas`
+--
+
+INSERT INTO `pantallas` (`id_pantalla`, `pantalla`) VALUES
+(1, 'ciudades'),
+(2, 'roles'),
+(3, 'funcionarios'),
+(4, 'usuarios'),
+(5, 'dependencias'),
+(6, 'areas'),
+(7, 'objetos'),
+(8, 'recepcion'),
+(9, 'exp_revisar'),
+(10, 'his_expedientes');
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +247,22 @@ CREATE TABLE `permisos` (
   `leer` tinyint(1) DEFAULT 0,
   `recepcion` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`id_permiso`, `id_usuario`, `id_pantalla`, `alta`, `baja`, `modificacion`, `leer`, `recepcion`) VALUES
+(1, 11, 1, 0, 0, 0, 1, 0),
+(2, 11, 2, 0, 0, 0, 0, 0),
+(3, 11, 3, 0, 0, 0, 0, 0),
+(4, 11, 4, 0, 0, 0, 0, 0),
+(5, 11, 5, 0, 0, 0, 0, 0),
+(6, 11, 6, 0, 0, 0, 0, 0),
+(7, 11, 7, 0, 0, 0, 0, 0),
+(8, 11, 8, 0, 0, 0, 0, 0),
+(9, 11, 9, 0, 0, 0, 0, 0),
+(10, 11, 10, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -286,8 +319,37 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `correo`, `id_rol`, `id_funcionario`, `foto`, `usuario`, `password`) VALUES
-(1, 'alexrivasbenitez324@gmail.com', 8, 1, 'alexander.jpg', 'alexander', 'AleX1.2.'),
-(7, 'juan@gmail.com', 11, 2, 'sin_perfil.jpg', 'juan324', 'JuaN1.2.');
+(1, 'alexrivasbenitez324@gmail.com', 8, 1, 'alexander.41', 'alexander', 'AlexRivas1.2.'),
+(11, 'juan@gmail.com', 10, 2, 'juan.png', 'juan', 'JuaN1.2.');
+
+--
+-- Disparadores `usuarios`
+--
+DELIMITER $$
+CREATE TRIGGER `triger_permisos` AFTER INSERT ON `usuarios` FOR EACH ROW BEGIN
+  INSERT INTO permisos (
+    id_usuario,
+    id_pantalla,
+    alta,
+    baja,
+    modificacion,
+    recepcion
+  ) 
+  VALUES
+    (NEW.id_usuario, 1, 0, 0, 0, 0),
+    (NEW.id_usuario, 2, 0, 0, 0, 0),
+    (NEW.id_usuario, 3, 0, 0, 0, 0),
+    (NEW.id_usuario, 4, 0, 0, 0, 0),
+    (NEW.id_usuario, 5, 0, 0, 0, 0),
+    (NEW.id_usuario, 6, 0, 0, 0, 0),
+    (NEW.id_usuario, 7, 0, 0, 0, 0),
+    (NEW.id_usuario, 8, 0, 0, 0, 0),
+    (NEW.id_usuario, 9, 0, 0, 0, 0),
+    (NEW.id_usuario, 10, 0, 0, 0, 0) ;
+    
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tablas volcadas
@@ -415,7 +477,13 @@ ALTER TABLE `objetos`
 -- AUTO_INCREMENT de la tabla `pantallas`
 --
 ALTER TABLE `pantallas`
-  MODIFY `id_pantalla` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pantalla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `id_permiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -427,7 +495,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
