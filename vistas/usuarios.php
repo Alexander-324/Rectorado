@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
     <link rel="stylesheet" href="../css/menu.css">
@@ -23,7 +24,10 @@
                 <h3>Usuarios</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+                <div class="table-responsive mt-2">
                     <table class="table table-striped table-hover w-100" id="tabla_usuarios">
                         <thead>
                             <tr>
@@ -71,7 +75,7 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="mt-4">
-                                            <button type="button" class="btn btn-primary mt-2" id="btn_buscar" onclick="buscar_funcionario();" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buscar"><i class="fa fa-search"></i></button>
+                                            <button type="button" class="btn btn-outline-primary mt-2" id="btn_buscar" onclick="buscar_funcionario();" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buscar"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -132,6 +136,7 @@
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/usuarios.js"></script>
 </body>
 

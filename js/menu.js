@@ -49,6 +49,7 @@ toastr.options = {
 // }
 
 $("#user_perfil").click(() => {
+  op = "Mostrar";
   $("#modalPerfil").modal("show");
 });
 $("#btn_salir").click(function () {
@@ -74,6 +75,7 @@ function userLogeado() {
         $("#p_telefono").text(json.telefono);
         $("#p_usuario").text(localStorage.user);
         $("#p_userPerfil").attr("src", "../img/usuarios/" + json.foto);
+        $("#user_img").attr("src", "../img/usuarios/" + json.foto);
         localStorage.id_funcionario = json.id_funcionario;
       }
     },
@@ -86,9 +88,9 @@ userLogeado();
 
 let op = "";
 
-$("#btn_sesion").click(()=> {
+$("#btn_sesion").click(() => {
   location.href = "../index.html";
-})
+});
 
 $("#div_datos").hide();
 $("#div_password").hide();
@@ -110,6 +112,7 @@ function vistaPrevia(foto) {
 
       reader.onload = function (e) {
         //Al cargar el contenido lo pasamos como atributo de la imagen de arriba
+        
         $("#span_vista").html(
           '<img class="img-thumbnail" id="vista_previa" src="">'
         );
@@ -202,17 +205,23 @@ $("#btn_datos").click(function () {
   });
 });
 
-
-
-
-$("#btn_password").click(function(){
+$("#btn_password").click(function () {
   op = "Password";
   $("#modalPerfil").modal("hide");
   $("#modalEditar").modal("show");
   $("#title_editar").text("Modificar Contraseña");
   menuOperaciones(op);
+});
 
-})
+$("#btn_foto").click(function () {
+  op = "Foto";
+  $("#modalPerfil").modal("hide");
+  $("#modalEditar").modal("show");
+  $("#title_editar").text("Modificar Foto de Perfil");
+  menuOperaciones(op);
+  $("#user").val(localStorage.user);
+  $("#foto").val("");
+});
 
 function editar_datos() {
   let ciNum = $("#ci_num").val();
@@ -266,87 +275,100 @@ function editar_datos() {
   }
 }
 
-function modificar_perfil() {}
-
 // Variable para validar que la contraseña ingresada es valida
-let password_valido = false;
-// Variable para validar que la contraseña ingresada es la actual antes del cambio
-let puede = false;
+let pass_valido = "";
 siguienteCtrl($("#anterior"), $("#bef"));
 siguienteCtrl($("#nueva"), $("#new"));
 siguienteCtrl($("#confirmar"), $("#conf"));
 
 function validarContrasenha() {
   let password = $("#nueva").val();
-  if (validar_contrasenha(password) == false) {
-    $("#error_nuevo").text(
-      "La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales"
-    );
-    $("#error_nuevo").css("color", "#e63946");
-    console.log("no valido");
-    password_valido = "no";
+  if (password.length > 0) {
+    if (validar_contrasenha(password) == false) {
+      $("#error_nuevo").text(
+        "La contraseña debe contener al menos 2 letras mayúsculas y minúsculas, 2 números y 2 caracteres especiales"
+      );
+      $("#error_nuevo").css("color", "#e63946");
+      console.log("no valido");
+      pass_valido = "no";
+    } else {
+      $("#error_nuevo").text("");
+      pass_valido = "si";
+      console.log("valido");
+    }
   } else {
     $("#error_nuevo").text("");
-    password_valido = "si";
-    console.log("valido");
+    pass_valido = "no";
   }
 }
 
-function verificar_contrasenha() {
-  let password = $("#anterior").val().trim();
-  $.ajax({
-    url: "../servicios/menu/verificar_password.php",
-    method: "POST",
-    data: { usuario: $("#p_usuario") },
-    dataType: "json",
-    success: function (json) {
-      if (password == json.password) {
-        $("#error_anterior").text("");
-        puede = true;
-        return true;
-      } else {
-        puede = false;
-        $("#error_anterior").text("Contraseña Incorrecta.");
-        $("#error_anterior").css("color", "#e63946");
-        return false;
-      }
-    },
-  });
-}
-
 function modificar_password() {
-  let usuario = $("#p_usuario").val();
+  let usuario = localStorage.user;
+  let anterior = $("#anterior").val().trim();
   let nueva = $("#nueva").val().trim();
   let confirmar = $("#confirmar").val().trim();
-  if (password_valido == true) {
-    if(verificar_contrasenha() == true) {
-      $("#error_anterior").text("");
-    } else {
-      $("#error_anterior").text("Contraseña Incorrecta.");
-      $("#error_anterior").css("color", "#e63946");      
-    }
-    // if (nueva == confirmar) {
-    //   $.ajax({
-    //     url: "../servicios/menu/modificar_contrasenha.php",
-    //     method: "POST",
-    //     data: 
-    //     {
-    //       password: nueva,
-    //       usuario: usuario
-    //     },
-    //     dataType: "json",
-    //     success: function(json) {
-    //       if(json.modificado == true) {
-    //         successMensaje(json.mensaje);
-    //         location.href = "../index.html";
-    //       } else {
-    //         warningMessage(json.mensaje);
-    //       }
-    //     }
-    //   });
-    // } else {
-    //   toastr.warning("Las contraseñas no coinciden");
-    // }
+  if (nueva != confirmar) {
+    toastr.warning("Las contraseñas no coinciden.!!!");
+  } else if (pass_valido == "si") {
+    $.ajax({
+      url: "../servicios/menu/modificar_contrasenha.php",
+      method: "POST",
+      data: {
+        usuario: usuario,
+        nueva: nueva,
+        anterior: anterior,
+      },
+      dataType: "json",
+      success: function (json) {
+        if (json.modificado == true) {
+          $("#error_anterior").text("");
+          Swal.fire({
+            title: "¡¡¡MENSAJE!!!",
+            text: json.mensaje,
+            icon: "success",
+            timer: 10000,
+            showConfirmButton: true,
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.href = "../index.html";
+            }
+          });
+        } else if (json.coincide == false) {
+          $("#error_anterior").css("color", "#e63946");
+          $("#error_anterior").text(json.mensaje);
+        } else {
+          warningMessage(json.mensaje);
+        }
+      },
+    });
+  }
+}
+
+function modificar_perfil() {
+  var data = new FormData($("#form_perfil")[0]);
+  if($("#foto").val() === "") {
+    toastr.warning("Seleccione una imagen.");
+    $("#foto").click(); 
+  } else {
+    $.ajax({
+      url: '../servicios/menu/modificar_perfil.php',
+      method: 'POST',
+      data: data,
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      success: function(json) {
+        if(json.modificado === true) {
+          successMessage(json.mensaje);
+          userLogeado();
+          $("#modalEditar").modal("hide");
+          $("#modalPerfil").modal("show");
+        } else {
+          warningMessage(json.mensaje);
+        }
+      }
+    })
   }
 }
 
@@ -360,6 +382,27 @@ $("#btn_confirmar").click(function () {
       break;
     case "Password":
       modificar_password();
+      break;
+  }
+});
+
+$("#btn_cancelar").click(function () {
+  switch (op) {
+    case "Datos":
+      $("#modalEditar").modal("hide");
+      $("#modalPerfil").modal("show");
+      $("#form_datos")[0].reset();
+      break;
+    case "Foto":
+      $("#modalEditar").modal("hide");
+      $("#modalPerfil").modal("show");
+      $("#form_perfil")[0].reset();
+      $("#span_vista").html("");
+      break;
+    case "Password":
+      $("#modalEditar").modal("hide");
+      $("#modalPerfil").modal("show");
+      $("#form_contrasena")[0].reset();
       break;
   }
 });

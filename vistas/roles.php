@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roles</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
@@ -21,7 +22,10 @@
                 <h3>Roles</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive w-100">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+                <div class="table-responsive w-100 mt-2">
                     <table class="table table-hover table striped w-100 dt-responsive" id="tabla_roles">
                         <thead>
                             <th style="width: 90%;">Roles</th>
@@ -75,6 +79,8 @@
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
+    <script src="../js/all.min.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/roles.js"></script>
 </body>
 

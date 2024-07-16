@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../css/datatables.min.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/toastr.min.css">
-    <!-- <link rel="stylesheet" href="../css/main.css"> -->
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
     <link rel="stylesheet" href="../css/menu.css">
 </head>
@@ -23,6 +22,9 @@
                 <h3>Ciudades</h3>
             </div>
             <div class="card-body">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
                 <div class="table-responsive mt-2">
                     <table class="table table-striped table-hover w-100" id="tabla_ciudades">
                         <thead class="text-center">
@@ -58,12 +60,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <div class="container">
-                            <div>
-                                <label for="ciudad">Ciudad</label>
-                                <input type="text" name="ciudad" id="ciudad" class="form-control text-uppercase" autocomplete="off" maxlength="30">
-                            </div>
+                    <div class="container">
+                        <div>
+                            <label for="ciudad">Ciudad</label>
+                            <input type="text" name="ciudad" id="ciudad" class="form-control text-uppercase" autocomplete="off" maxlength="30">
                         </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" id="btn_guardar"> Guardar</button>
@@ -79,6 +81,8 @@
     <script src="../js/toastr.js"></script>
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/functions.js"></script>
+    <script src="../js/permisos.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/ciudades.js"></script>
 </body>
 

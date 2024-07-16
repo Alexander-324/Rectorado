@@ -57,45 +57,48 @@
             </div>
             <div class="modal-body">
               <div id="div_datos">
-                <div class="mt-2">
-                  <label for="ci_num">C.I</label>
-                  <input type="text" name="ci_num" id="ci_num" class="form-control">
-                </div>
-                <div class="mt-2">
-                  <label for="f_nombre">Nombre</label>
-                  <input type="text" name="f_nombre" id="f_nombre" class="form-control">
-                </div>
-                <div class="mt-2">
-                  <label for="f_apellido">Apellido</label>
-                  <input type="text" name="f_apellido" id="f_apellido" class="form-control">
-                </div>
-                <div class="mt-2">
-                  <label for="f_ciudad">Ciudad</label>
-                  <select name="f_ciudad" id="f_ciudad" class="form-select">
-                  </select>
-                </div>
-                <div class="mt-2">
-                  <label for="f_direccion">Dirección</label>
-                  <input type="text" name="f_direccion" id="f_direccion" class="form-control">
-                </div>
-                <div class="mt-2">
-                  <label for="f_telefono">Telefono</label>
-                  <input type="text" name="f_telefono" id="f_telefono" class="form-control">
-                </div>
+                <form action="#" id="form_datos">
+                  <div class="mt-2">
+                    <label for="ci_num">C.I</label>
+                    <input type="text" name="ci_num" id="ci_num" class="form-control">
+                  </div>
+                  <div class="mt-2">
+                    <label for="f_nombre">Nombre</label>
+                    <input type="text" name="f_nombre" id="f_nombre" class="form-control">
+                  </div>
+                  <div class="mt-2">
+                    <label for="f_apellido">Apellido</label>
+                    <input type="text" name="f_apellido" id="f_apellido" class="form-control">
+                  </div>
+                  <div class="mt-2">
+                    <label for="f_ciudad">Ciudad</label>
+                    <select name="f_ciudad" id="f_ciudad" class="form-select">
+                    </select>
+                  </div>
+                  <div class="mt-2">
+                    <label for="f_direccion">Dirección</label>
+                    <input type="text" name="f_direccion" id="f_direccion" class="form-control">
+                  </div>
+                  <div class="mt-2">
+                    <label for="f_telefono">Telefono</label>
+                    <input type="text" name="f_telefono" id="f_telefono" class="form-control">
+                  </div>
+                </form>
               </div>
               <div id="div_password">
                 <div>
-                  <div class="mt-2">
-                    <label for="password">Contraseña Anterior</label>
-                    <div class="input-group">
-                      <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" />
-                      <button class="btn btn-dark border-0" type="button" id="bef" onclick="mostrarPassword('anterior', 'eye_anterior')">
-                        <i class="fa fa-eye eye_anterior fw-bold"></i>
-                      </button>
+                  <form action="#" id="form_contrasena">
+                    <div class="mt-2">
+                      <label for="password">Contraseña Anterior</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" />
+                        <button class="btn btn-dark border-0" type="button" id="bef" onclick="mostrarPassword('anterior', 'eye_anterior')">
+                          <i class="fa fa-eye eye_anterior fw-bold"></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div id="error_anterior" class="mt-1 fs-6">
-                  </div>
+                    <div id="error_anterior" class="mt-1 fs-6">
+                    </div>
                 </div>
                 <div>
                   <div class="mt-2">
@@ -121,15 +124,21 @@
                     </div>
                   </div>
                 </div>
+                </form>
               </div>
               <div id="div_foto">
-                <div>
-                  <input type="file" class="form-control" id="foto" name="foto">
-                  <div class="mt-2 text-center">
-                    <span id="span_vista">
-                    </span>
+                <form action="#" id="form_perfil">
+                  <div>
+                    <input type="file" class="form-control" id="foto" name="foto">
+                    <div class="mt-2 text-white" id="file_name">
+                      <input type="hidden" name="user" id="user">
+                    </div>
+                    <div class="mt-2 text-center">
+                      <span id="span_vista">
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
             <div class="modal-footer">
@@ -146,7 +155,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <button type="button" class="border-0 bg-transparent" id="user_perfil">
-            <img class="img-fluid rounded-5" id="user_img" src="../img/usuarios/alexander.jpg" alt="" width="50px" height="50px">
+            <img class="img-fluid rounded-5" id="user_img" src="#" alt="" width="50px" height="50px">
           </button>
           <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
@@ -165,13 +174,13 @@
                     Mantenimientos
                   </a>
                   <ul class="dropdown-menu nav-icon">
-                    <li><a class="dropdown-item" href="ciudades.php">Ciudades</a></li>
-                    <li><a class="dropdown-item" href="roles.php">Roles</a></li>
-                    <li><a class="dropdown-item" href="funcionarios.php">Funcionarios</a></li>
-                    <li><a class="dropdown-item" href="usuarios.php">Usuarios</a></li>
-                    <li><a class="dropdown-item" href="dependencias.php">Dependencias</a></li>
-                    <li><a class="dropdown-item" href="areas.php">Áreas</a></li>
-                    <li><a class="dropdown-item" href="objetos.php">Objetos</a></li>
+                    <li><a class="dropdown-item" id="ciudades" href="ciudades.php">Ciudades</a></li>
+                    <li><a class="dropdown-item" id="roles" href="roles.php">Roles</a></li>
+                    <li><a class="dropdown-item" id="funcionarios" href="funcionarios.php">Funcionarios</a></li>
+                    <li><a class="dropdown-item" id="usuarios" href="usuarios.php">Usuarios</a></li>
+                    <li><a class="dropdown-item" id="dependencias" href="dependencias.php">Dependencias</a></li>
+                    <li><a class="dropdown-item" id="areas" href="areas.php">Áreas</a></li>
+                    <li><a class="dropdown-item" id="objetos" href="objetos.php">Objetos</a></li>
                   </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -179,9 +188,9 @@
                     Expendientes
                   </a>
                   <ul class="dropdown-menu nav-icon">
-                    <li><a class="dropdown-item" href="expedientes.php">Recepcion</a></li>
-                    <li><a class="dropdown-item" href="#">Expedientes a Revisar</a></li>
-                    <li><a class="dropdown-item" href="#">Historial de Expedientes</a></li>
+                    <li><a class="dropdown-item" id="recepcion" href="expedientes.php">Recepcion</a></li>
+                    <li><a class="dropdown-item" id="exp_revisar" href="#">Expedientes a Revisar</a></li>
+                    <li><a class="dropdown-item" id="his_expedientes" href="#">Historial de Expedientes</a></li>
                   </ul>
                 </li>
               </ul>

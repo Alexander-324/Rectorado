@@ -166,6 +166,11 @@ function cargarUsuarios() {
   });
 }
 
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_usuarios.php", "_blank");
+});
+
 cargarUsuarios();
 
 function buscar_funcionario() {

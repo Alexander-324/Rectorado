@@ -140,6 +140,11 @@ function cargarFuncionarios() {
   });
 }
 
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_funcionarios.php", "_blank");
+});
+
 cargarFuncionarios();
 
 function esta_cargado() {

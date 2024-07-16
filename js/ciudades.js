@@ -18,6 +18,7 @@ toastr.options = {
 
 let op_ciudades = "";
 let id_ciudad = 0;
+var pantalla = "ciudades";
 
 var ciudades;
 
@@ -75,7 +76,14 @@ function cargarCiudades() {
   });
 }
 
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_ciudad.php", "_blank");
+});
+
 cargarCiudades();
+
+permisosPantalla(localStorage.user, pantalla);
 
 $("#btn_nuevo").click(function () {
   op_ciudades = "Nuevo";
@@ -88,7 +96,7 @@ $("#btn_salir").click(() => {
   location.href = "menu.php";
 });
 
-siguienteClick($("#ciudad"), $("#btn_guardar"))
+siguienteClick($("#ciudad"), $("#btn_guardar"));
 
 function guadarCiudad() {
   let ciudad = $("#ciudad").val().toUpperCase();

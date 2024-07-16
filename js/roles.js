@@ -86,6 +86,11 @@ function cargarRoles() {
   });
 }
 
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_roles.php", "_blank");
+});
+
 cargarRoles();
 
 function guardarRol() {

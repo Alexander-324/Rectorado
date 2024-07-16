@@ -22,12 +22,15 @@
                 <h3>Objetos</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive w-100">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+                <div class="table-responsive w-100 mt-2">
                     <table class="table table-hover table striped w-100 dt-responsive" id="tabla_objetos">
                         <thead>
                             <th style="width: 10%;">Código</th>
                             <th style="width: 80%;">Objeto</th>
-                            <th>Acciones</th>
+                            <th style="width: 10%;">Acciones</th>
                         </thead>
                     </table>
                     <tbody>

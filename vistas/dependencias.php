@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dependencias</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
@@ -21,7 +22,10 @@
                 <h3>Dependencias</h3>
             </div>
             <div class="card-body">
-                <div class="table-responsive w-100">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+                <div class="table-responsive w-100 mt-2">
                     <table class="table table-hover table striped w-100 dt-responsive" id="tabla_dependencias">
                         <thead>
                             <th style="width: 90%;">Dependencias</th>
@@ -71,10 +75,12 @@
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/all.min.js"></script>
     <script src="../js/datatables.min.js"></script>
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/dependencias.js"></script>
 </body>
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expedientes</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/all.min.css">
     <link rel="stylesheet" href="../css/datatables.min.css">
     <link rel="stylesheet" href="../css/menu.css">
@@ -28,11 +29,15 @@
                         <div class="d-flex flex-column">
                             <div class="mt-2">
                                 <label for="nro">Nro. Expediente</label>
-                                <input type="text" name="nro" id="nro" class="form-control" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10">
+                                <input type="text" name="nro" id="nro" class="form-control text-end" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10" autofocus = "on">
                             </div>
                             <div class="mt-2">
-                                <label for="nro">Fecha de Recepción</label>
+                                <label for="fecha">Fecha de Recepción</label>
                                 <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date("Y-m-d") ?>">
+                            </div>
+                            <div class="mt-2">
+                                <label for="anio">Año de Recepción</label>
+                                <input type="text" name="anio" id="anio" class="form-control text-end" maxlength="4" oninput="this.value=solo_numeros_sin_cero(this.value)">
                             </div>
                             <div class="mt-2">
                                 <label for="area">Remitente</label>
@@ -43,8 +48,8 @@
                             <div class="mt-2">
                                 <div class="row">
                                     <div class="col-11">
-                                        <label for="objetos">Objeto</label>
-                                        <select name="objetos" id="objetos" class="form-select">
+                                        <label for="objets">Objeto</label>
+                                        <select name="objets" id="objets" class="form-select">
                                             <option value="">Seleccione un Objeto</option>
                                         </select>
                                     </div>
@@ -137,6 +142,7 @@
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="../js/toastr.js"></script>
     <script src="../js/functions.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/expedientes.js"></script>
 
 </body>

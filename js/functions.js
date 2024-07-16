@@ -52,7 +52,7 @@ function successMensaje(mensaje) {
     title: "!!!MENSAJE!!!",
     text: mensaje,
     icon: "success",
-    showConfirmButton: false,
+    showConfirmButton: true,
     timer: "1500",
   });
 }

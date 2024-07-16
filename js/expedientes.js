@@ -72,11 +72,11 @@ $(document).ready(function () {
       url: "../servicios/objetos/cargar_objetos.php",
       dataType: "json",
       success: function (json) {
-        $("#objetos").append(
+        $("#objets").append(
           $("<option>").text("Seleccione un objeto").attr("value", "")
         );
         $.each(json, function (i, obj) {
-          $("#objetos").append(
+          $("#objets").append(
             $("<option>").text(obj.objeto).attr("value", obj.id_objeto)
           );
         });
@@ -113,8 +113,9 @@ $(document).ready(function () {
   function cargado() {
     let nro_expediente = $("#nro").val().trim();
     let fecha = $("#fecha").val().trim();
+    let anio = $("#anio").val().trim();
     let area = $("#area").val();
-    let objeto = $("#objetos").val();
+    let objeto = $("#objets").val();
     let dependencia = $("#dependencia").val();
     let observacion = $("#observacion").val().toUpperCase().trim();
 
@@ -125,6 +126,10 @@ $(document).ready(function () {
     } else if (fecha.length == 0) {
       toastr.warning("Ingrese la fecha de recepción.!!!");
       $("#fecha").focus();
+      return false;
+    } else if (anio.length == 0) {
+      toastr.warning("Ingrese el año de recepción.!!!");
+      $("#anio").focus();
       return false;
     } else if (area.length == 0) {
       toastr.warning("Seleccione el remitente.!!!");
@@ -144,8 +149,9 @@ $(document).ready(function () {
   function guardarExpediente() {
     let nro_expediente = $("#nro").val().trim();
     let fecha = $("#fecha").val().trim();
+    let anio = $("#anio").val().trim();
     let area = $("#area").val();
-    let objeto = $("#objetos").val();
+    let objeto = $("#objets").val();
     let dependencia = $("#dependencia").val();
     let observacion = $("#observacion").val().toUpperCase().trim();
     if (verificado == true) {
@@ -155,6 +161,7 @@ $(document).ready(function () {
         data: {
           nro_expediente: nro_expediente,
           fecha_recepcion: fecha,
+          anio_recepcion: anio,
           id_area: area,
           id_objeto: objeto,
           id_dependencia: dependencia,

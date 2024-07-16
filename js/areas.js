@@ -86,6 +86,11 @@ toastr.options = {
     });
   }
   
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_areas.php", "_blank");
+});
+
   cargarAreas();
   
   function guardarArea() {

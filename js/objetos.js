@@ -93,6 +93,11 @@ toastr.options = {
     });
   }
   
+// Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_objetos.php", "_blank");
+});
+
   cargarObjetos();
   
   function guardarObjeto() {

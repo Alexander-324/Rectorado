@@ -27,6 +27,7 @@
   <script src="../js/sweetalert2.all.min.js"></script>
   <script src="../js/functions.js"></script>
   <script src="../js/menu.js"></script>
+  <script src="../js/permisos.js"></script>
 </body>
 
 </html>

@@ -12,11 +12,12 @@ try {
         $salida["mensaje"] = "El numero de expediente ingresado ya existe.";
     } else {
         $stmt = $conexion->prepare("INSERT INTO expedientes 
-        (nro_expediente, fecha_recepcion, id_area, id_objeto, id_dependencia, id_funcionario, observacion, estado)
-        VALUES(?,?,?,?,?,?,?,?)");
+        (nro_expediente, fecha_recepcion, anio_recepcion, id_area, id_objeto, id_dependencia, id_funcionario, observacion, estado)
+        VALUES(?,?,?,?,?,?,?,?,?)");
         $stmt->execute(array(
             $_POST["nro_expediente"],
             $_POST["fecha_recepcion"],
+            $_POST["anio_recepcion"],
             $_POST["id_area"],
             $_POST["id_objeto"],
             $_POST["id_dependencia"],
