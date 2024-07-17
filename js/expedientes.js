@@ -84,6 +84,11 @@ $(document).ready(function () {
     });
   }
 
+  // Llamada al reporte de la tabla
+$("#generarPDF").click(function () {
+  window.open("../reportes/report_expedientes.php", "_blank");
+});
+
   comboObjetos();
 
   fechaActual($("#fecha"));

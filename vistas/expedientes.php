@@ -24,12 +24,15 @@
                 <h3 class="text-white">Recepción de Expedientes</h3>
             </div>
             <div class="card-body">
-                <div class="container">
+                <div class="">
+                    <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+                <div class="container mt-2">
                     <form action="#" id="form_expedientes">
                         <div class="d-flex flex-column">
                             <div class="mt-2">
                                 <label for="nro">Nro. Expediente</label>
-                                <input type="text" name="nro" id="nro" class="form-control text-end" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10" autofocus = "on">
+                                <input type="text" name="nro" id="nro" class="form-control text-end" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10" autofocus="on">
                             </div>
                             <div class="mt-2">
                                 <label for="fecha">Fecha de Recepción</label>
