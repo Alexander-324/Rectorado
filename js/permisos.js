@@ -5,7 +5,6 @@ function permisosMenu() {
     data: { usuario: localStorage.user },
     dataType: "json",
     success: function (data) {
-      console.log("Permisos");
       if (Array.isArray(data)) {
         data.forEach(function (permiso) {
           let pantalla = permiso.pantalla;

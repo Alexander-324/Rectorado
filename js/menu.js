@@ -52,9 +52,6 @@ $("#user_perfil").click(() => {
   op = "Mostrar";
   $("#modalPerfil").modal("show");
 });
-$("#btn_salir").click(function () {
-  location.href = "../index.html";
-});
 
 // Funcion que obtiene y muestra los datos del usuario logeado
 
@@ -77,6 +74,8 @@ function userLogeado() {
         $("#p_userPerfil").attr("src", "../img/usuarios/" + json.foto);
         $("#user_img").attr("src", "../img/usuarios/" + json.foto);
         localStorage.id_funcionario = json.id_funcionario;
+        localStorage.dependencia = json.dependencia;
+        localStorage.rol = json.rol;
       }
     },
   });

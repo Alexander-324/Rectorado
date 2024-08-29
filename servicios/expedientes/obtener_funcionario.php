@@ -4,20 +4,30 @@ include("../conexion.php");
 
 try {
 
-    $stmt = $conexion->prepare("SELECT id_funcionario, CONCAT(nombre,' ',apellido) as funcionario
-    FROM funcionarios WHERE ci = ?");
-    $stmt->execute(array($_POST["ci"]));
+    $password = "";
+    $id_funcionario = "";
+    $stmt = $conexion->prepare("SELECT id_funcionario, password FROM usuarios WHERE usuario = ?");
+    $stmt->execute(array($_POST["usuario"]));   
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $salida = array();
-    foreach ($resultado as $datos) {
-        $salida["id_funcionario"] = $datos["id_funcionario"];
-        $salida["funcionario"] = $datos["funcionario"];
-        $salida["encontrado"] = true;
+    foreach($resultado as $dato) {
+        $id_funcionario = $dato["id_funcionario"];
+        $password = $dato["password"];
     }
+    $salida = array();
+
+    if($password == $_POST["password"]){
+        $salida["confirmado"] = true;
+        $salida["id_funcionario"] = $id_funcionario;
+        $salida["mensaje"] = "Contraseña Correcta.!!!";
+    } else {
+        $salida["confirmado"] = false;
+        $salida["mensaje"] = "Contraseña Incorrecta.!!!";
+    }
+    
 } catch (PDOException $e) {
     $salida = array(
-        "encontrado" => false,
-        "mensaje" => "Ocurrio un error en la obtención de datos. " . $e->getMessage()
+        "confirmado" => false,
+        "mensaje" => "Ocurrio un error en la verficación de datos. " . $e->getMessage()
     );
 }
 

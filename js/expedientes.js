@@ -72,9 +72,6 @@ $(document).ready(function () {
       url: "../servicios/objetos/cargar_objetos.php",
       dataType: "json",
       success: function (json) {
-        $("#objets").append(
-          $("<option>").text("Seleccione un objeto").attr("value", "")
-        );
         $.each(json, function (i, obj) {
           $("#objets").append(
             $("<option>").text(obj.objeto).attr("value", obj.id_objeto)
@@ -199,23 +196,29 @@ $("#generarPDF").click(function () {
   });
 
   $("#btn_conf").click(function () {
-    let ci = $("#ci").val();
+    let password = $("#password_usuario").val();
     $.ajax({
       url: "../servicios/expedientes/obtener_funcionario.php",
       method: "POST",
-      data: { ci: ci },
+      data: 
+      { 
+        usuario: localStorage.user,
+        password: password 
+      },
       dataType: "json",
       success: function (json) {
-        if (ci.length == 0) {
-          toastr.warning("Ingrese su C.I.!!!");
+        if (password.length == 0) {
+          toastr.warning("Ingrese su contraseña de usuario.!!!");
           $("#ci").focus();
         } else {
-          if (json.encontrado == true) {
+          if (json.confirmado == true) {
             verificado = true;
-            $("#recepcionado").val(json.funcionario);
             id_funcionario = json.id_funcionario;
-            $("#modalConfirmar").modal("hide");
             guardarExpediente();
+            $("#modalConfirmar").modal("hide");
+          } else {
+            verificado = false;
+            errorMessage(json.mensaje);
           }
         }
       },

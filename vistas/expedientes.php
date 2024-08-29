@@ -24,25 +24,33 @@
                 <h3 class="text-white">Recepción de Expedientes</h3>
             </div>
             <div class="card-body">
-                <div class="">
+                <!-- <div class="">
                     <button type="button" class="btn btn-outline-danger" id="generarPDF">Generar PDF <i class="fa-solid fa-file-pdf"></i></button>
-                </div>
+                </div> -->
                 <div class="container mt-2">
                     <form action="#" id="form_expedientes">
                         <div class="d-flex flex-column">
-                            <div class="mt-2">
-                                <label for="nro">Nro. Expediente</label>
-                                <input type="text" name="nro" id="nro" class="form-control text-end" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10" autofocus="on">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="">
+                                        <label for="nro">Nro. Expediente</label>
+                                        <input type="text" name="nro" id="nro" class="form-control text-end" oninput="this.value=solo_numeros_sin_cero(this.value)" maxlength="10" autofocus="on">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="">
+                                        <label for="fecha">Fecha de Recepción</label>
+                                        <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date("Y-m-d") ?>">
+                                    </div>
+                                </div>
+                                <div class="col-4">                                    
+                                    <div class="">
+                                        <label for="anio">Año de Recepción</label>
+                                        <input type="text" name="anio" id="anio" class="form-control text-end" maxlength="4" oninput="this.value=solo_numeros_sin_cero(this.value)">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-2">
-                                <label for="fecha">Fecha de Recepción</label>
-                                <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date("Y-m-d") ?>">
-                            </div>
-                            <div class="mt-2">
-                                <label for="anio">Año de Recepción</label>
-                                <input type="text" name="anio" id="anio" class="form-control text-end" maxlength="4" oninput="this.value=solo_numeros_sin_cero(this.value)">
-                            </div>
-                            <div class="mt-2">
+                            <div class="">
                                 <label for="area">Remitente</label>
                                 <select name="area" id="area" class="form-select">
                                     <option value="">Seleccione un área</option>
@@ -71,10 +79,6 @@
                                 <label for="observacion">Observación</label>
                                 <input type="text" name="observacion" id="observacion" class="form-control" oninput="this.value=mayusculas_espacio(this.value)" maxlength="100">
                             </div>
-                            <div class="mt-2">
-                                <label for="recepcionado">Recepcionado por</label>
-                                <input type="text" name="recepcionado" id="recepcionado" class="form-control" readonly maxlength="100">
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -92,7 +96,7 @@
         </div>
     </div>
 
-    <!-- Modal Confirmar Usuario -->
+    <!-- Modal Nuevo Objeto -->
     <div class="modal fade" id="modalNuevoObj" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -127,8 +131,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="ci">C.I</label>
-                    <input type="text" name="ci" id="ci" class="form-control">
+                    <label for="ci">Contraseña</label>
+                    <input type="text" name="password_usuario" id="password_usuario" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" id="btn_conf">Confirmar</button>

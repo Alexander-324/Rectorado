@@ -89,7 +89,7 @@
                 <div>
                   <form action="#" id="form_contrasena">
                     <div class="mt-2">
-                      <label for="password">Contraseña Anterior</label>
+                      <label for="anterior">Contraseña Anterior</label>
                       <div class="input-group">
                         <input type="password" class="form-control" name="anterior" id="anterior" maxlength="30" />
                         <button class="btn btn-dark border-0" type="button" id="bef" onclick="mostrarPassword('anterior', 'eye_anterior')">
@@ -102,7 +102,7 @@
                 </div>
                 <div>
                   <div class="mt-2">
-                    <label for="password">Nueva Contraseña</label>
+                    <label for="nueva">Nueva Contraseña</label>
                     <div class="input-group">
                       <input type="password" class="form-control" name="nueva" id="nueva" maxlength="30" oninput="validarContrasenha()" />
                       <button class="btn btn-dark border-0" type="button" id="new" onclick="mostrarPassword('nueva', 'eye_nuevo')">
@@ -115,7 +115,7 @@
                 </div>
                 <div>
                   <div class="mt-2">
-                    <label for="password">Confirmar Contraseña</label>
+                    <label for="confirmar">Confirmar Contraseña</label>
                     <div class="input-group">
                       <input type="password" class="form-control" name="confirmar" id="confirmar" maxlength="30" />
                       <button class="btn btn-dark border-0" type="button" id="conf" onclick="mostrarPassword('confirmar', 'eye_confirmar')">
@@ -189,7 +189,7 @@
                   </a>
                   <ul class="dropdown-menu nav-icon">
                     <li><a class="dropdown-item" id="recepcion" href="expedientes.php">Recepcion</a></li>
-                    <li><a class="dropdown-item" id="exp_revisar" href="#">Expedientes a Revisar</a></li>
+                    <li><a class="dropdown-item" id="exp_revisar" href="expedientes_revisar.php">Expedientes a Revisar</a></li>
                     <li><a class="dropdown-item" id="his_expedientes" href="#">Historial de Expedientes</a></li>
                   </ul>
                 </li>
