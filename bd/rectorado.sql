@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-07-2024 a las 18:18:15
+-- Tiempo de generación: 04-09-2024 a las 00:53:17
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -77,7 +77,6 @@ INSERT INTO `ciudades` (`id_ciudad`, `ciudad`) VALUES
 (14, 'CAAGUAZÚ'),
 (15, 'CONCEPCIÓN'),
 (16, 'CORONEL OVIEDO'),
-(17, 'CAACUPÉ'),
 (18, 'SAN JUAN BAUTISTA'),
 (19, 'PILAR'),
 (20, 'CAAZAPÁ'),
@@ -99,8 +98,7 @@ INSERT INTO `ciudades` (`id_ciudad`, `ciudad`) VALUES
 (37, 'NUEVA COLOMBIA'),
 (38, 'YGATIMÍ'),
 (40, 'GUAYAIBÍ'),
-(42, 'SAN BLAS'),
-(43, 'AREGUÁ');
+(42, 'SAN BLAS');
 
 -- --------------------------------------------------------
 
@@ -134,7 +132,7 @@ INSERT INTO `dependencias` (`id_dependencia`, `dependencia`) VALUES
 --
 
 CREATE TABLE `expedientes` (
-  `íd_expediente` int(11) NOT NULL,
+  `id_expediente` int(11) NOT NULL,
   `nro_expediente` int(11) NOT NULL,
   `fecha_recepcion` date NOT NULL,
   `anio_recepcion` int(11) NOT NULL DEFAULT 2000,
@@ -150,9 +148,14 @@ CREATE TABLE `expedientes` (
 -- Volcado de datos para la tabla `expedientes`
 --
 
-INSERT INTO `expedientes` (`íd_expediente`, `nro_expediente`, `fecha_recepcion`, `anio_recepcion`, `id_area`, `id_objeto`, `id_dependencia`, `id_funcionario`, `observacion`, `estado`) VALUES
+INSERT INTO `expedientes` (`id_expediente`, `nro_expediente`, `fecha_recepcion`, `anio_recepcion`, `id_area`, `id_objeto`, `id_dependencia`, `id_funcionario`, `observacion`, `estado`) VALUES
 (1, 178, '2024-07-11', 2000, 1, 1, 9, 1, 'NINGUNA', 'enviado a rectorado'),
-(2, 176, '2024-07-12', 2000, 1, 3, 9, 1, 'NINGUNA', 'enviado a rectorado');
+(2, 150, '2024-07-12', 2024, 1, 3, 9, 1, 'NINGUNA', 'enviado a rectorado'),
+(3, 78484, '2024-06-04', 2024, 6, 4, 4, 1, 'BECA', 'enviado a rectorado'),
+(4, 48484, '2024-03-19', 2021, 6, 1, 2, 1, 'AAA', 'enviado a rectorado'),
+(5, 176, '2024-07-16', 2024, 1, 4, 9, 1, 'NINGUNA', 'enviado a rectorado'),
+(6, 201, '2024-08-21', 2024, 1, 4, 2, 1, 'NINGUNA', 'enviado a rectorado'),
+(7, 204, '2024-09-02', 2024, 4, 4, 9, 1, 'NINGUNA', 'enviado a rectorado');
 
 -- --------------------------------------------------------
 
@@ -178,7 +181,7 @@ CREATE TABLE `funcionarios` (
 INSERT INTO `funcionarios` (`id_funcionario`, `ci`, `nombre`, `apellido`, `id_ciudad`, `direccion`, `telefono`, `id_dependencia`) VALUES
 (1, '6658363', 'ALEXANDER', 'RIVAS BENÍTEZ', 15, 'SANTO DOMINGO DE GUZMAN C/ANGEL GIOVINNE', '0986430579', 4),
 (2, '1234567', 'JUAN', 'LOPEZ', 20, 'SAN ANTONIO', '00000000', 5),
-(3, '6969100', 'OSCAR', 'CONCHA', 1, 'GUILLERMO ROMANIACH', '00000000', 3),
+(3, '6969100', 'OSCAR', 'CONCHA', 15, 'GUILLERMO ROMANIACH', '00000000', 3),
 (4, '6761829', 'CRISTHIAN', 'VALENZUELA', 5, 'VILLA ARMANDO', '00000000', 4),
 (5, '7074066', 'RODNEY', 'ROJAS', 11, 'VILLA ARMANDO', '00000000', 5);
 
@@ -261,7 +264,7 @@ INSERT INTO `permisos` (`id_permiso`, `id_usuario`, `id_pantalla`, `alta`, `baja
 (6, 11, 6, 0, 0, 0, 0, 0),
 (7, 11, 7, 0, 0, 0, 0, 0),
 (8, 11, 8, 0, 0, 0, 0, 0),
-(9, 11, 9, 0, 0, 0, 0, 0),
+(9, 11, 9, 0, 0, 1, 1, 0),
 (10, 11, 10, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -319,8 +322,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `correo`, `id_rol`, `id_funcionario`, `foto`, `usuario`, `password`) VALUES
-(1, 'alexrivasbenitez324@gmail.com', 8, 1, 'alexander.41', 'alexander', 'AlexRivas1.2.'),
-(11, 'juan@gmail.com', 10, 2, 'juan.png', 'juan', 'JuaN1.2.');
+(1, 'alexrivasbenitez324@gmail.com', 10, 1, 'alexander.41', 'alexander', 'AleX1.2.'),
+(11, 'juan@gmail.com', 12, 2, 'juan.png', 'juan', 'JuaN1.2.');
 
 --
 -- Disparadores `usuarios`
@@ -377,7 +380,7 @@ ALTER TABLE `dependencias`
 -- Indices de la tabla `expedientes`
 --
 ALTER TABLE `expedientes`
-  ADD PRIMARY KEY (`íd_expediente`),
+  ADD PRIMARY KEY (`id_expediente`),
   ADD KEY `id_dependencia` (`id_dependencia`),
   ADD KEY `id_funcionario` (`id_funcionario`),
   ADD KEY `id_area` (`id_area`),
@@ -459,7 +462,7 @@ ALTER TABLE `dependencias`
 -- AUTO_INCREMENT de la tabla `expedientes`
 --
 ALTER TABLE `expedientes`
-  MODIFY `íd_expediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_expediente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `funcionarios`
@@ -528,7 +531,7 @@ ALTER TABLE `permisos`
 -- Filtros para la tabla `rutas`
 --
 ALTER TABLE `rutas`
-  ADD CONSTRAINT `rutas_ibfk_1` FOREIGN KEY (`id_expediente`) REFERENCES `expedientes` (`íd_expediente`),
+  ADD CONSTRAINT `rutas_ibfk_1` FOREIGN KEY (`id_expediente`) REFERENCES `expedientes` (`id_expediente`),
   ADD CONSTRAINT `rutas_ibfk_2` FOREIGN KEY (`id_dependencia`) REFERENCES `dependencias` (`id_dependencia`);
 
 --

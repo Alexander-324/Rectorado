@@ -79,9 +79,30 @@ function warningMessage(mensaje) {
     max="<?= date("Y-m-d") ?>"
 */
 
+/* agregar lo siguiente a un input datetime-local para no permitir seleccionar fechas y horas futuras
+    max="<?= date('Y-m-d\TH:i', time()) ?>"
+*/
+
+// Asigna la fecha actual dd/mm/YYYY H:m:ss
 function fechaActual(fecha) {
   var hoy = new Date().toISOString().split("T")[0];
   fecha.val(hoy);
+}
+
+// Asigna la fecha actual dd/mm/YYYY 
+function fechaActualTime(fecha) {
+  var ahora = new Date();
+  var fechaFormateada = ahora.toISOString().split("T")[0]; // Formato YYYY-MM-DD
+  var horas = String(ahora.getHours()).padStart(2, '0');
+  var minutos = String(ahora.getMinutes()).padStart(2, '0');
+  var fechaHoraCompleta = fechaFormateada + " " + horas + ":" + minutos;
+  fecha.val(fechaHoraCompleta);
+}
+
+function asignarAnhio(fecha, campo) {
+  let ahora = new Date(fecha.val());
+  let anhio = ahora.getFullYear();
+  campo.val(anhio);
 }
 
 function formatear(num) {

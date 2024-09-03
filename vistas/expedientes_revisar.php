@@ -70,16 +70,38 @@
                 <div class="modal-body">
                     <div class="container">
                         <div>
-                            <label for="ciudad">Nro</label>
-                            <input type="text" name="nro" id="nro" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                            <label for="nro_edit">Nro</label>
+                            <input type="text" name="nro_edit" id="nro_edit" class="form-control text-uppercase" oninput="this.value=solo_numeros_sin_cero(this.value)" autocomplete="off" maxlength="30">
                         </div>
-                        <div>
-                            <label for="fecha">Fecha</label>
-                            <input type="text" name="fecha" id="fecha" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                        <div class="mt-2">
+                            <label for="fecha_edit">Fecha</label>
+                            <input type="text" name="fecha_edit" id="fecha_edit" class="form-control">
                         </div>
-                        <div>
-                            <label for="anhio">Año</label>
-                            <input type="text" name="anhio" id="anhio" class="form-control text-uppercase" autocomplete="off" maxlength="30">
+                        <div class="mt-2">
+                            <label for="anhio_edit">Año</label>
+                            <input type="text" name="anhio_edit" id="anhio_edit" class="form-control text-uppercase" oninput="this.value=solo_numeros_sin_cero(this.value)" autocomplete="off" maxlength="4">
+                        </div>
+                        <div class="mt-2">
+                            <label for="area_edit">Area</label>
+                            <select name="area_edit" id="area_edit" class="form-select">
+
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label for="objeto_edit">Objeto</label>
+                            <select name="objeto_edit" id="objeto_edit" class="form-select">
+
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label for="dependencia_edit">Dependencia</label>
+                            <select name="dependencia_edit" id="dependencia_edit" class="form-select">
+
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label for="observacion_edit">Observación</label>
+                            <input type="text" name="observacion_edit" id="observacion_edit" class="form-control">
                         </div>
                     </div>
                 </div>

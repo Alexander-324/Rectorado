@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +41,7 @@
                                 <div class="col-4">
                                     <div class="">
                                         <label for="fecha">Fecha de Recepción</label>
-                                        <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date("Y-m-d") ?>">
+                                        <input type="date" name="fecha" id="fecha" class="form-control text-end" max="<?= date('Y-m-d', time()) ?>">
                                     </div>
                                 </div>
                                 <div class="col-4">                                    
@@ -122,7 +123,7 @@
         </div>
     </div>
 
-    <!-- Modal Nuevo Objeto -->
+    <!-- Modal Confirmar -->
     <div class="modal fade" id="modalConfirmar" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -132,7 +133,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="ci">Contraseña</label>
-                    <input type="text" name="password_usuario" id="password_usuario" class="form-control">
+                    <input type="password" name="password_usuario" id="password_usuario" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" id="btn_conf">Confirmar</button>

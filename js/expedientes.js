@@ -82,13 +82,29 @@ $(document).ready(function () {
   }
 
   // Llamada al reporte de la tabla
-$("#generarPDF").click(function () {
-  window.open("../reportes/report_expedientes.php", "_blank");
-});
+  $("#generarPDF").click(function () {
+    window.open("../reportes/report_expedientes.php", "_blank");
+  });
 
   comboObjetos();
 
+  function nextNro() {
+    $.ajax({
+      url: "../servicios/expedientes/nextNro.php",
+      dataType: "json",
+      success: function (json) {
+        $("#nro").val(json.nro);
+      },
+    });
+  }
+
+  nextNro();
   fechaActual($("#fecha"));
+  asignarAnhio($("#fecha"), $("#anio"));
+
+  $("#fecha").change(function () {
+    asignarAnhio($("#fecha"), $("#anio"));
+  });
 
   // function buscarObjeto() {
   //   let codigo = $("#cod_obj").val();
@@ -179,6 +195,8 @@ $("#generarPDF").click(function () {
             $("#form_expedientes")[0].reset();
             $("#nro").focus();
             fechaActual($("#fecha"));
+            asignarAnhio($("#fecha"), $("#anio"));
+            nextNro();
           } else {
             $("#nro").focus();
             warningMessage(json.mensaje);
@@ -200,10 +218,9 @@ $("#generarPDF").click(function () {
     $.ajax({
       url: "../servicios/expedientes/obtener_funcionario.php",
       method: "POST",
-      data: 
-      { 
+      data: {
         usuario: localStorage.user,
-        password: password 
+        password: password,
       },
       dataType: "json",
       success: function (json) {

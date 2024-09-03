@@ -5,8 +5,9 @@ $salida = array();
 
 try {
 
-    $stmt = $conexion->prepare("SELECT nro_expediente FROM expedientes WHERE nro_expediente = ?");
-    $stmt->execute(array($_POST["nro_expediente"]));
+    $stmt = $conexion->prepare("SELECT nro_expediente, anio_recepcion 
+    FROM expedientes WHERE nro_expediente = ? AND anio_recepcion = ?");
+    $stmt->execute(array($_POST["nro_expediente"], $_POST["anio_recepcion"]));
     if ($stmt->rowCount() > 0) {
         $salida["guardado"] = false;
         $salida["mensaje"] = "El numero de expediente ingresado ya existe.";
